@@ -30,26 +30,17 @@ namespace OpenGLWinControl
         /// </summary>
         IntPtr hglrc;
 
+        /// <summary>
+        ///     Timer for refreshing the scene
+        /// </summary>
+        Timer refreshTimer;
 
-        Action onInit;
 
         /// <summary>
         ///     Action executed when this control is loaded.
-        ///     When new value set control automaticaly reloads.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Action OnInit
-        {
-            get
-            {
-                return onInit;
-            }
-            set
-            {
-                onInit = value;
-                onInit?.Invoke();
-            }
-        }
+        public Action OnInit { get; set; }
 
         /// <summary>
         ///     Action executed after Refresh() method
@@ -63,83 +54,50 @@ namespace OpenGLWinControl
         ///     defined in RefreshInterval property.
         ///     Default value is false.
         /// </summary>
-        public bool AutoRefresh { get; set; } = false;
+        public bool AutoRefresh
+        {
+            get => refreshTimer.Enabled;
+            set => refreshTimer.Enabled = value;
+        }
 
         /// <summary>
         ///     Time in milliseconds between OnRender calls.
-        ///     Default value is 33 (equal 30 FPS)
+        ///     Default value is 33 (equals 30 FPS)
         /// </summary>
-        public uint RefreshInterval { get; set; } = 33;
+        public int RefreshInterval
+        {
+            get => refreshTimer.Interval;
+            set => refreshTimer.Interval = value;
+        }
 
-        #region Constructors
-
+        
         /// <summary>
-        ///     Initialize OpenGl Control with default callbacks.
+        ///     Initialize OpenGl Control with default callbacks 
+        ///     for inintialization and rendering.
         /// </summary>
         /// <exception cref="OpenGLInitException"></exception>
         public OpenGLControl()
         {
-            onInit = DefaultInit;
+            OnInit = DefaultInit;
             OnRender = DefaultRender;
 
             InitializeComponent();
             InitializeOpenGL();
+            InitializeRefreshTimer();
         }
-
-
-        /// <summary>
-        ///     Initialize OpenGl Control with defined callback for Init
-        /// </summary>
-        /// <param name="OnInit">
-        ///     Action executed when this control is loaded.
-        ///     null value set default init action.
-        /// </param>
-        /// <exception cref="OpenGLInitException"></exception>
-        public OpenGLControl(Action OnInit)
-        {
-            if (onInit != null)
-                this.onInit = OnInit;
-            else
-                this.onInit = DefaultInit;
-
-            OnRender = DefaultRender;
-
-            InitializeComponent();
-            InitializeOpenGL();
-        }
-
-
-        /// <summary>
-        ///     Initialize OpenGl Control with defined callback for Init and Render.
-        /// </summary>
-        /// <param name="OnInit">
-        ///     Action executed when this control is loaded.
-        ///     null value set default Init action.
-        /// </param>
-        /// <param name="OnRender">
-        ///     Action executed after Refresh() method
-        ///     or every frame if AutoRefresh property set to true.
-        ///     null value set default Render action.
-        /// </param>
-        /// <exception cref="OpenGLInitException"></exception>
-        public OpenGLControl(Action OnInit, Action OnRender)
-        {
-            if (onInit != null)
-                this.onInit = OnInit;
-            else
-                this.onInit = DefaultInit;
-            if (OnRender != null)
-                this.OnRender = OnRender;
-            else
-                this.OnRender = DefaultRender;
-
-            InitializeComponent();
-            InitializeOpenGL();
-        }
-
-        #endregion
+        
 
         #region Initializing methods
+
+        /// <summary>
+        ///     Setup timer to be used for refreshing the scene
+        /// </summary>
+        void InitializeRefreshTimer()
+        {
+            refreshTimer = new Timer();
+            refreshTimer.Tick += (obj, e) => Refresh();            
+            RefreshInterval = 33; // Default value 33 is equal to 30 FPS
+        }
 
         /// <summary>
         ///     Setup Control to use like OpenGL window.
@@ -154,11 +112,9 @@ namespace OpenGLWinControl
                 throw new OpenGLInitException("Can`t get control content handler");
 
             InitPixelFormat();
-
-            //If everything is ok init scene
-            OnInit?.Invoke();
+            
             //redraw scene when control resized
-            Resize += (obj,e) => OnRender();
+            SizeChanged += (obj,e) => Refresh();
         }
 
         /// <summary>
@@ -191,6 +147,18 @@ namespace OpenGLWinControl
 
 
         /// <summary>
+        ///     Iitializes scene using OnInit function
+        /// </summary>
+        public void InitializeScene()
+        {
+            if (OnInit == null)
+                throw new OpenGLInitException("OnInit function is null");
+            else
+                OnInit.Invoke();
+        }
+        
+
+        /// <summary>
         ///     Default callback for OnInit action.
         /// </summary>
         protected virtual void DefaultInit()
@@ -211,6 +179,7 @@ namespace OpenGLWinControl
         }
 
         #endregion
+
 
         /// <summary>
         ///     Forces the control to invalidate its client area and immediately redraw itself
