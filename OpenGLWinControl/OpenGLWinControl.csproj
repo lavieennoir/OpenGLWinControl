@@ -55,6 +55,7 @@
     <Compile Include="OpenGL\Enumerations\ShadingModel.cs" />
     <Compile Include="OpenGL\Exceptions\OpenGLInitException.cs" />
     <Compile Include="OpenGL\GL.cs" />
+    <Compile Include="OpenGL\GL.Colors.cs" />
     <Compile Include="OpenGL\Glu.cs" />
     <Compile Include="OpenGL\Glut.cs" />
     <Compile Include="OpenGLControl.cs">

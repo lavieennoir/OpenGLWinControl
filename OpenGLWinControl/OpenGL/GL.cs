@@ -12,8 +12,41 @@ namespace OpenGLWinControl.OpenGL
     /// Containts static methods imported from OpenGL library.
     /// (Here you can find methods wich have prefix gl in source library)
     /// </summary>
-    public static class GL
+    public static partial class GL
     {
+        /// <summary>
+        ///     Allocates empty area of memory with size of input array 
+        ///     and provides safe pointer to this memory. 
+        ///     Pointer will be relesed after function call. 
+        /// </summary>
+        /// <typeparam name="T">
+        ///     Type of an item of input array.
+        /// </typeparam>
+        /// <param name="arr">
+        ///     Array that will be casted to IntPtr.
+        /// </param>
+        /// <param name="safePtrAction">
+        ///     Action with pointer you got.
+        /// </param>
+        private static void InvokeWithArrayPointer<T>(T[] arr, Action<IntPtr> safePtrAction)
+        {
+            if (arr == null || arr.Length <= 1)
+                throw new ArgumentException("Array has ont enough arguments.");
+            int size = Marshal.SizeOf(arr[0]) * arr.Length;
+            IntPtr ptr = Marshal.AllocHGlobal(size);
+            try
+            {
+                safePtrAction(ptr);
+            }
+            catch (Exception e)
+            {
+                Marshal.FreeHGlobal(ptr);
+                throw new ArgumentException("Can`t cast to unmanaged array.", e);
+            }
+        }
+
+
+
         [DllImport("opengl32.dll", EntryPoint = "glShadeModel")]
         public static extern void ShadeModel(ShadingModel mode);
 
@@ -49,9 +82,6 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glBlendFunc")]
         public static extern void BlendFunc(BlendingFactor sfactor, BlendingFactor dfactor);
-
-        [DllImport("opengl32.dll", EntryPoint = "glColor3f")]
-        public static extern void Color3f(float red, float green, float blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glVertex3f")]
         public static extern void Vertex3f(float x, float y, float z);

@@ -40,14 +40,14 @@ namespace OpenGLWinControl
         ///     Action executed when this control is loaded.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Action OnInit { get; set; }
+        public Action OnInit { get; set; } = null;
 
         /// <summary>
         ///     Action executed after Refresh() method
         ///     or every frame if AutoRefresh property set to true.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Action OnRender { get; set; }
+        public Action OnRender { get; set; } = null;
 
         /// <summary>
         ///     If set to true control invokes OnRender action with interval 
@@ -78,9 +78,6 @@ namespace OpenGLWinControl
         /// <exception cref="OpenGLInitException"></exception>
         public OpenGLControl()
         {
-            OnInit = DefaultInit;
-            OnRender = DefaultRender;
-
             InitializeComponent();
             InitializeOpenGL();
             InitializeRefreshTimer();
@@ -112,9 +109,6 @@ namespace OpenGLWinControl
                 throw new OpenGLInitException("Can`t get control content handler");
 
             InitPixelFormat();
-            
-            //redraw scene when control resized
-            SizeChanged += (obj,e) => Refresh();
         }
 
         /// <summary>
@@ -158,26 +152,6 @@ namespace OpenGLWinControl
         }
         
 
-        /// <summary>
-        ///     Default callback for OnInit action.
-        /// </summary>
-        protected virtual void DefaultInit()
-        {
-            GL.ShadeModel(ShadingModel.SMOOTH); // Enable smooth shading
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 0.5f); // Black background
-            GL.ClearDepth(1.0f);                   // Depth buffer setup
-            GL.Enable(Capability.DEPTH_TEST);    // Enable Depth test
-        }
-
-        /// <summary>
-        ///     Default callback for OnRender action.
-        /// </summary>
-        protected virtual void DefaultRender()
-        {
-            GL.Clear(AttributeMask.COLOR_BUFFER_BIT
-                | AttributeMask.DEPTH_BUFFER_BIT); // Clear screen and depth buffer
-        }
-
         #endregion
 
 
@@ -192,7 +166,7 @@ namespace OpenGLWinControl
             if (OnRender != null)
             {
                 OnRender();
-                SwapBuffers();
+                //SwapBuffers();
             }
         }
         
