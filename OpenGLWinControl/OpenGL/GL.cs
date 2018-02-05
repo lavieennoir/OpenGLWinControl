@@ -56,6 +56,10 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glMatrixMode")]
         public static extern void MatrixMode(MatrixMode mode);
 
+        [DllImport("opengl32.dll", EntryPoint = "glOrtho")]
+        public static extern void Ortho(double left, double right,
+            double bottom, double top, double zNear, double zFar);
+
         [DllImport("opengl32.dll", EntryPoint = "glLoadIdentity")]
         public static extern void LoadIdentity();
 
@@ -85,6 +89,25 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glVertex3f")]
         public static extern void Vertex3f(float x, float y, float z);
+
+        [DllImport("opengl32.dll", EntryPoint = "glTranslatef")]
+        public static extern void Translate(float x, float y, float z);
+
+        [DllImport("opengl32.dll", EntryPoint = "glTranslated")]
+        public static extern void Translate(double x, double y, double z);
+
+        [DllImport("opengl32.dll", EntryPoint = "glScalef")]
+        public static extern void Scale(float x, float y, float z);
+
+        [DllImport("opengl32.dll", EntryPoint = "glScaled")]
+        public static extern void Scale(double x, double y, double z);
+
+        [DllImport("opengl32.dll", EntryPoint = "glRotatef")]
+        public static extern void Rotate(float x, float y, float z);
+
+        [DllImport("opengl32.dll", EntryPoint = "glRotated")]
+        public static extern void Rotate(double x, double y, double z);
+
 
         [DllImport("opengl32.dll", EntryPoint = "glBegin")]
         public static extern void Begin(BeginMode mode);

@@ -166,7 +166,7 @@ namespace OpenGLWinControl
             if (OnRender != null)
             {
                 OnRender();
-                //SwapBuffers();
+                SwapBuffers();
             }
         }
         
