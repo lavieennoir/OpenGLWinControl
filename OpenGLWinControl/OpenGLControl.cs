@@ -163,10 +163,10 @@ namespace OpenGLWinControl
         /// </summary>
         protected virtual void DefaultInit()
         {
-            GL.ShadeModel(ShadingModel.GL_SMOOTH); // Enable smooth shading
+            GL.ShadeModel(ShadingModel.SMOOTH); // Enable smooth shading
             GL.ClearColor(0.0f, 0.0f, 0.0f, 0.5f); // Black background
             GL.ClearDepth(1.0f);                   // Depth buffer setup
-            GL.Enable(GetTarget.GL_DEPTH_TEST);    // Enable Depth test
+            GL.Enable(Capability.DEPTH_TEST);    // Enable Depth test
         }
 
         /// <summary>
@@ -174,8 +174,8 @@ namespace OpenGLWinControl
         /// </summary>
         protected virtual void DefaultRender()
         {
-            GL.Clear(AttributeMask.GL_COLOR_BUFFER_BIT
-                | AttributeMask.GL_DEPTH_BUFFER_BIT); // Clear screen and depth buffer
+            GL.Clear(AttributeMask.COLOR_BUFFER_BIT
+                | AttributeMask.DEPTH_BUFFER_BIT); // Clear screen and depth buffer
         }
 
         #endregion

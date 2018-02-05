@@ -14,7 +14,7 @@ namespace OpenGLWinControl.OpenGL
     /// </summary>
     public static class GL
     {
-        [DllImport("opengl32.dll", EntryPoint = "glShadeModel", CallingConvention = CallingConvention.Winapi)]
+        [DllImport("opengl32.dll", EntryPoint = "glShadeModel")]
         public static extern void ShadeModel(ShadingModel mode);
 
         [DllImport("opengl32.dll", EntryPoint = "glViewport")]
@@ -33,13 +33,16 @@ namespace OpenGLWinControl.OpenGL
         public static extern void ClearDepth(double depth);
 
         [DllImport("opengl32.dll", EntryPoint = "glEnable")]
-        public static extern void Enable(GetTarget cap);
+        public static extern void Enable(Capability cap);
+
+        [DllImport("opengl32.dll", EntryPoint = "glDisable")]
+        public static extern void Disable(Capability cap);
 
         [DllImport("opengl32.dll", EntryPoint = "glDepthFunc")]
         public static extern void DepthFunc(AlphaFunction func);
 
         [DllImport("opengl32.dll", EntryPoint = "glHint")]
-        public static extern void Hint(ushort target, ushort mode);
+        public static extern void Hint(HintTarget target, HintMode mode);
 
         [DllImport("opengl32.dll", EntryPoint = "glClear")]
         public static extern void Clear(AttributeMask mask);

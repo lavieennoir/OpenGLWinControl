@@ -43,7 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextProcessor.cs" />
-    <Compile Include="OpenGL\Enumerations\Enumerations.cs" />
+    <Compile Include="OpenGL\Enumerations\AttributeMask.cs" />
+    <Compile Include="OpenGL\Enumerations\BeginMode.cs" />
+    <Compile Include="OpenGL\Enumerations\BlendingFactor.cs" />
+    <Compile Include="OpenGL\Enumerations\Capability.cs" />
+    <Compile Include="OpenGL\Enumerations\AlphaFunction.cs" />
+    <Compile Include="OpenGL\Enumerations\GetTarget.cs" />
+    <Compile Include="OpenGL\Enumerations\HintMode.cs" />
+    <Compile Include="OpenGL\Enumerations\HintTarget.cs" />
+    <Compile Include="OpenGL\Enumerations\MatrixMode.cs" />
+    <Compile Include="OpenGL\Enumerations\ShadingModel.cs" />
     <Compile Include="OpenGL\Exceptions\OpenGLInitException.cs" />
     <Compile Include="OpenGL\GL.cs" />
     <Compile Include="OpenGL\Glu.cs" />
