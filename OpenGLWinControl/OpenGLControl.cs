@@ -150,19 +150,18 @@ namespace OpenGLWinControl
             else
                 OnInit.Invoke();
         }
-        
+
 
         #endregion
 
-
         /// <summary>
-        ///     Forces the control to invalidate its client area and immediately redraw itself
-        ///     and any child controls.
         ///     Invokes OnRender action.
+        ///     Raises Control.Paint event.
         /// </summary>
-        public override void Refresh()
+        protected override void OnPaint(PaintEventArgs e)
         {
-            base.Refresh();
+            base.OnPaint(e);
+
             if (OnRender != null)
             {
                 OnRender();
