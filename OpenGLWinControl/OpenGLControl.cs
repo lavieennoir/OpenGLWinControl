@@ -18,11 +18,16 @@ namespace OpenGLWinControl
     /// </summary>
     public partial class OpenGLControl : UserControl
     {
+        /// <summary>
+        ///     Count of OpenGLControls initialized in application.
+        ///     Using more than one OpenGLControl causes OpenGLInitException.
+        /// </summary>
+        static protected int controlCount = 0;
+
 
         /// <summary>
         ///     Handler for device content.
         /// </summary>
-        /// 
         IntPtr hDC;
 
         /// <summary>
@@ -78,6 +83,11 @@ namespace OpenGLWinControl
         /// <exception cref="OpenGLInitException"></exception>
         public OpenGLControl()
         {
+            //Check count of OpenGLcontrols 
+            controlCount++;
+            if (controlCount > 1)
+                throw new OpenGLInitException("Another instance of OpenGLControl class has already been initialized.");
+
             InitializeComponent();
             InitializeOpenGL();
             InitializeRefreshTimer();
@@ -124,19 +134,19 @@ namespace OpenGLWinControl
 
             // get the device context's best, available pixel format match 
             if ((iPixelFormat = ContextProcessor.ChoosePixelFormat(hDC, ref pfd)) == 0)
-                throw new OpenGLInitException("ChoosePixelFormat Failed");
+                throw new OpenGLInitException("ChoosePixelFormat Failed.");
 
             if (!ContextProcessor.SetPixelFormat(hDC, iPixelFormat, ref pfd))
-                throw new OpenGLInitException("SetPixelFormat Failed");
+                throw new OpenGLInitException("SetPixelFormat Failed.");
 
             //create openGL context
             hglrc = ContextProcessor.wglGetCurrentContext();
 
             if ((hglrc = ContextProcessor.wglCreateContext(hDC)) == IntPtr.Zero)
-                throw new OpenGLInitException("wglCreateContext Failed");
+                throw new OpenGLInitException("wglCreateContext Failed.");
 
             if (!ContextProcessor.wglMakeCurrent(hDC, hglrc))
-                throw new OpenGLInitException("wglMakeCurrent Failed");
+                throw new OpenGLInitException("wglMakeCurrent Failed.");
         }
 
 
@@ -146,7 +156,7 @@ namespace OpenGLWinControl
         public void InitializeScene()
         {
             if (OnInit == null)
-                throw new OpenGLInitException("OnInit function is null");
+                throw new OpenGLInitException("OnInit function is null.");
             else
                 OnInit.Invoke();
         }
