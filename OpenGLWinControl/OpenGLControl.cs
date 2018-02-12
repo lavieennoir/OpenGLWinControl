@@ -19,11 +19,51 @@ namespace OpenGLWinControl
     public partial class OpenGLControl : UserControl
     {
         /// <summary>
-        ///     Count of OpenGLControls initialized in application.
-        ///     Using more than one OpenGLControl causes OpenGLInitException.
+        ///     Occurs whenever the control is first time displayed.
         /// </summary>
-        static protected int controlCount = 0;
+        public event EventHandler Shown;
 
+        /// <summary>
+        ///     Indicates whether control was shown on form.
+        /// </summary>
+        private bool wasShown = false;
+
+        /// <summary>
+        ///     Count of OpenGLControls initialized in application.
+        ///     Using more than one OpenGLControl causes OpenGLInitException 
+        ///     if EnableMultipleControls set to false.
+        /// </summary>
+        public static int ControlCount { get; protected set;} = 0;
+
+        /// <summary>
+        ///     Determines whether is possible to create more than one OpenGLControl in application.
+        ///     Enabling this feature may cause unexpected control behavior!
+        /// </summary>
+        public static bool EnableMultipleControls;
+
+
+        bool multipleControls;
+
+        /// <summary>
+        ///     Wrapper for static field EnableMultipleControls.
+        ///     Used in Windows Forms designer.
+        /// </summary>
+        [Category("Static")]
+        [Browsable(true)]
+        [DefaultValue(false)]
+        [Description(
+            "Determines whether is possible to create" +
+            " more than one OpenGLControl in application." +
+            " Enabling this feature may cause unexpected control behavior!")]
+        public bool MultipleControls
+        {
+            get => EnableMultipleControls;
+            set
+            {
+                multipleControls = value;
+                EnableMultipleControls = value;
+            }
+        }
 
         /// <summary>
         ///     Handler for device content.
@@ -44,14 +84,14 @@ namespace OpenGLWinControl
         /// <summary>
         ///     Action executed when this control is loaded.
         /// </summary>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
         public Action OnInit { get; set; } = null;
 
         /// <summary>
-        ///     Action executed after Refresh() method
+        ///     Action executed after Render() method
         ///     or every frame if AutoRefresh property set to true.
         /// </summary>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
         public Action OnRender { get; set; } = null;
 
         /// <summary>
@@ -59,6 +99,11 @@ namespace OpenGLWinControl
         ///     defined in RefreshInterval property.
         ///     Default value is false.
         /// </summary>
+        [Category("OpenGL")]
+        [Browsable(true)]
+        [Description(
+            "If set to true control invokes OnRender action" +
+            " with interval defined in RefreshInterval property.")]
         public bool AutoRefresh
         {
             get => refreshTimer.Enabled;
@@ -69,6 +114,9 @@ namespace OpenGLWinControl
         ///     Time in milliseconds between OnRender calls.
         ///     Default value is 33 (equals 30 FPS)
         /// </summary>
+        [Category("OpenGL")]
+        [Browsable(true)]
+        [Description("Time in milliseconds between OnRender calls.")]
         public int RefreshInterval
         {
             get => refreshTimer.Interval;
@@ -77,24 +125,39 @@ namespace OpenGLWinControl
 
         
         /// <summary>
-        ///     Initialize OpenGl Control with default callbacks 
+        ///     Initialize OpenGl Control without callbacks 
         ///     for inintialization and rendering.
         /// </summary>
         /// <exception cref="OpenGLInitException"></exception>
         public OpenGLControl()
         {
-            //Check count of OpenGLcontrols 
-            controlCount++;
-            if (controlCount > 1)
-                throw new OpenGLInitException("Another instance of OpenGLControl class has already been initialized.");
+            CheckMultipleControls();
 
             InitializeComponent();
             InitializeOpenGL();
             InitializeRefreshTimer();
+
+            //Render when control is shown
+            Shown += (obj, e) => Render();
         }
-        
+
 
         #region Initializing methods
+
+        /// <summary>
+        ///     Checks control count and whether multiple controls allowed.
+        /// </summary>
+        void CheckMultipleControls()
+        {
+            //set static field value in constructor
+            EnableMultipleControls = multipleControls;
+
+            //Check count of OpenGLcontrols 
+            ControlCount++;
+            if (!EnableMultipleControls && ControlCount > 1)
+                throw new OpenGLInitException(
+                    "Another instance of OpenGLControl class has already been initialized.");
+        }
 
         /// <summary>
         ///     Setup timer to be used for refreshing the scene
@@ -102,7 +165,7 @@ namespace OpenGLWinControl
         void InitializeRefreshTimer()
         {
             refreshTimer = new Timer();
-            refreshTimer.Tick += (obj, e) => Refresh();            
+            refreshTimer.Tick += (obj, e) => Render();            
             RefreshInterval = 33; // Default value 33 is equal to 30 FPS
         }
 
@@ -161,28 +224,50 @@ namespace OpenGLWinControl
                 OnInit.Invoke();
         }
 
-
         #endregion
 
         /// <summary>
-        ///     Invokes OnRender action.
         ///     Raises Control.Paint event.
+        ///     And raises Shown event if called first time.
         /// </summary>
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
+            //Don`t call base.OnPaint to avoid painting control with parent background color
+            //base.OnPaint(e);
 
+            if (!wasShown)
+            {
+                wasShown = true;
+                Shown?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        ///     Invokes OnRender action.
+        ///     Raises Control.Layout event.
+        /// </summary>
+        protected override void OnLayout(LayoutEventArgs e)
+        {
+            Render();
+            base.OnLayout(e);
+        }
+
+        /// <summary>
+        ///     Render the scene by raising OnRender event.
+        /// </summary>
+        public void Render()
+        {
             if (OnRender != null)
             {
                 OnRender();
                 SwapBuffers();
             }
         }
-        
+
 
         /// <summary>
         ///     Swap control context buffers for double buffered render.
-        ///     Need to call after each Render() call.
+        ///     Need to call after each OnRender() call.
         /// </summary>
         protected void SwapBuffers()
         {
