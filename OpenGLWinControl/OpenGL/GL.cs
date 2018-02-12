@@ -46,79 +46,159 @@ namespace OpenGLWinControl.OpenGL
         }
 
 
+        #region Function import
 
-        [DllImport("opengl32.dll", EntryPoint = "glShadeModel")]
-        public static extern void ShadeModel(ShadingModel mode);
+        //A
 
-        [DllImport("opengl32.dll", EntryPoint = "glViewport")]
-        public static extern void Viewport(int x, int y, uint width, uint height);
 
-        [DllImport("opengl32.dll", EntryPoint = "glMatrixMode")]
-        public static extern void MatrixMode(MatrixMode mode);
-
-        [DllImport("opengl32.dll", EntryPoint = "glOrtho")]
-        public static extern void Ortho(double left, double right,
-            double bottom, double top, double zNear, double zFar);
-
-        [DllImport("opengl32.dll", EntryPoint = "glLoadIdentity")]
-        public static extern void LoadIdentity();
-
-        [DllImport("opengl32.dll", EntryPoint = "glClearColor")]
-        public static extern void ClearColor(float red, float green, float blue, float alpha);
-
-        [DllImport("opengl32.dll", EntryPoint = "glClearDepth")]
-        public static extern void ClearDepth(double depth);
-
-        [DllImport("opengl32.dll", EntryPoint = "glEnable")]
-        public static extern void Enable(Capability cap);
-
-        [DllImport("opengl32.dll", EntryPoint = "glDisable")]
-        public static extern void Disable(Capability cap);
-
-        [DllImport("opengl32.dll", EntryPoint = "glDepthFunc")]
-        public static extern void DepthFunc(AlphaFunction func);
-
-        [DllImport("opengl32.dll", EntryPoint = "glHint")]
-        public static extern void Hint(HintTarget target, HintMode mode);
-
-        [DllImport("opengl32.dll", EntryPoint = "glClear")]
-        public static extern void Clear(AttributeMask mask);
-
-        [DllImport("opengl32.dll", EntryPoint = "glBlendFunc")]
-        public static extern void BlendFunc(BlendingFactor sfactor, BlendingFactor dfactor);
-
-        [DllImport("opengl32.dll", EntryPoint = "glVertex3f")]
-        public static extern void Vertex3f(float x, float y, float z);
-
-        [DllImport("opengl32.dll", EntryPoint = "glTranslatef")]
-        public static extern void Translate(float x, float y, float z);
-
-        [DllImport("opengl32.dll", EntryPoint = "glTranslated")]
-        public static extern void Translate(double x, double y, double z);
-
-        [DllImport("opengl32.dll", EntryPoint = "glScalef")]
-        public static extern void Scale(float x, float y, float z);
-
-        [DllImport("opengl32.dll", EntryPoint = "glScaled")]
-        public static extern void Scale(double x, double y, double z);
-
-        [DllImport("opengl32.dll", EntryPoint = "glRotatef")]
-        public static extern void Rotate(float x, float y, float z);
-
-        [DllImport("opengl32.dll", EntryPoint = "glRotated")]
-        public static extern void Rotate(double x, double y, double z);
+        //B
 
 
         [DllImport("opengl32.dll", EntryPoint = "glBegin")]
         public static extern void Begin(BeginMode mode);
 
+
+        [DllImport("opengl32.dll", EntryPoint = "glBlendFunc")]
+        public static extern void BlendFunc(BlendingFactor sfactor, BlendingFactor dfactor);
+
+
+        //C
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glClear")]
+        public static extern void Clear(AttributeMask mask);
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glClearColor")]
+        public static extern void ClearColor(float red, float green, float blue, float alpha);
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glClearDepth")]
+        public static extern void ClearDepth(double depth);
+
+
+        //D
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glDepthFunc")]
+        public static extern void DepthFunc(AlphaFunction func);
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glDisable")]
+        public static extern void Disable(Capability cap);
+
+
+        //E
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glEnable")]
+        public static extern void Enable(Capability cap);
+
+
         [DllImport("opengl32.dll", EntryPoint = "glEnd")]
         public static extern void End();
+
+
+        //F
+
+
+        //G
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glGetError")]
+        public static extern ErrorCode GetError();
+
+
+        //H
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glHint")]
+        public static extern void Hint(HintTarget target, HintMode mode);
+
+
+        //I
+
+
+        //J
+
+
+        //K
+
+
+        //L
+
+            
+        [DllImport("opengl32.dll", EntryPoint = "glLoadIdentity")]
+        public static extern void LoadIdentity();
+
+
+        //M
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glMatrixMode")]
+        public static extern void MatrixMode(MatrixMode mode);
+
+
+        //N
+
+
+        //O
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glOrtho")]
+        public static extern void Ortho(double left, double right,
+            double bottom, double top, double zNear, double zFar);
+
+
+        //P
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glPopMatrix")]
+        public static extern void PopMatrix();
+
 
         [DllImport("opengl32.dll", EntryPoint = "glPushMatrix")]
         public static extern void PushMatrix();
 
-        [DllImport("opengl32.dll", EntryPoint = "glPopMatrix")]
-        public static extern void PopMatrix();
+
+        //Q
+
+
+        //R
+
+
+        //S
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glShadeModel")]
+        public static extern void ShadeModel(ShadingModel mode);
+
+
+        //T
+
+
+        //U
+
+
+        //V
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glViewport")]
+        public static extern void Viewport(int x, int y, uint width, uint height);
+
+
+        //W
+
+
+        //X
+
+
+        //Y
+
+
+        //Z
+        
+
+        #endregion
     }
 }
