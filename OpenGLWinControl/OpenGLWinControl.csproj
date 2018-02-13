@@ -53,6 +53,7 @@
     <Compile Include="OpenGL\Enumerations\GL\AlphaFunction.cs" />
     <Compile Include="OpenGL\Enumerations\GL\ClientAttributeMask.cs" />
     <Compile Include="OpenGL\Enumerations\GL\ClientSideCapability.cs" />
+    <Compile Include="OpenGL\Enumerations\GL\InterleavedArrayType.cs" />
     <Compile Include="OpenGL\Enumerations\GL\PointerDataType.cs" />
     <Compile Include="OpenGL\Enumerations\GL\InfoStringName.cs" />
     <Compile Include="OpenGL\Enumerations\GL\PixelCopyType.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="OpenGL\Enumerations\GL\PolygonMode.cs" />
     <Compile Include="OpenGL\Enumerations\GL\ShadingModel.cs" />
     <Compile Include="OpenGL\Exceptions\OpenGLInitException.cs" />
+    <Compile Include="OpenGL\GL\GL.VertexPointer.cs" />
     <Compile Include="OpenGL\GL\GL.Indexes.cs" />
     <Compile Include="OpenGL\GL\GL.GetString.cs" />
     <Compile Include="OpenGL\GL\GL.Gets.cs" />
@@ -78,7 +80,6 @@
     <Compile Include="OpenGL\GL\GL.DrawElements.cs" />
     <Compile Include="OpenGL\GL\GL.IndexPointer.cs" />
     <Compile Include="OpenGL\GL\GL.ColorPointer.cs" />
-    <Compile Include="OpenGL\GL\GL.VertexPointer.cs" />
     <Compile Include="OpenGL\GL\GL.Rects.cs" />
     <Compile Include="OpenGL\GL\GL.RasterPoses.cs" />
     <Compile Include="OpenGL\GL\GL.TexCoords.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="OpenGLControl.Designer.cs">
       <DependentUpon>OpenGLControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenGL\IRenderingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

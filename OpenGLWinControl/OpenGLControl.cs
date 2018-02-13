@@ -33,7 +33,7 @@ namespace OpenGLWinControl
         ///     Using more than one OpenGLControl causes OpenGLInitException 
         ///     if EnableMultipleControls set to false.
         /// </summary>
-        public static int ControlCount { get; protected set;} = 0;
+        public static int ControlCount { get; protected set; } = 0;
 
         /// <summary>
         ///     Determines whether is possible to create more than one OpenGLControl in application.
@@ -80,29 +80,16 @@ namespace OpenGLWinControl
         /// </summary>
         Timer refreshTimer;
 
-
+        
         /// <summary>
-        ///     Action executed when this control is loaded.
-        /// </summary>
-        [Browsable(false)]
-        public Action OnInit { get; set; } = null;
-
-        /// <summary>
-        ///     Action executed after Render() method
-        ///     or every frame if AutoRefresh property set to true.
-        /// </summary>
-        [Browsable(false)]
-        public Action OnRender { get; set; } = null;
-
-        /// <summary>
-        ///     If set to true control invokes OnRender action with interval 
+        ///     If set to true control invokes Render method with interval 
         ///     defined in RefreshInterval property.
         ///     Default value is false.
         /// </summary>
         [Category("OpenGL")]
         [Browsable(true)]
         [Description(
-            "If set to true control invokes OnRender action" +
+            "If set to true control invokes Render method" +
             " with interval defined in RefreshInterval property.")]
         public bool AutoRefresh
         {
@@ -111,16 +98,43 @@ namespace OpenGLWinControl
         }
 
         /// <summary>
-        ///     Time in milliseconds between OnRender calls.
+        ///     Time in milliseconds between Render calls.
         ///     Default value is 33 (equals 30 FPS)
         /// </summary>
         [Category("OpenGL")]
         [Browsable(true)]
-        [Description("Time in milliseconds between OnRender calls.")]
+        [Description("Time in milliseconds between Render calls.")]
         public int RefreshInterval
         {
             get => refreshTimer.Interval;
             set => refreshTimer.Interval = value;
+        }
+
+
+        private IRenderingContext renderingContext;
+
+
+        /// <summary>
+        ///     Current rendering context attached to this control.
+        /// </summary>
+        [Browsable(false)]
+        public IRenderingContext RenderingContext
+        {
+            get => renderingContext;
+            set
+            {
+                if(renderingContext != null)
+                    Layout -= (obj, e) => renderingContext.Resize(this.Width, this.Height);
+
+                renderingContext = value;
+
+                if (renderingContext != null)
+                {
+                    Layout += (obj, e) => renderingContext.Resize(this.Width, this.Height);
+
+                    renderingContext.Init(this.Width, this.Height);
+                }
+            }
         }
 
         
@@ -214,14 +228,14 @@ namespace OpenGLWinControl
 
 
         /// <summary>
-        ///     Iitializes scene using OnInit function
+        ///     Iitializes scene using RenderingContext.Init function
         /// </summary>
         public void InitializeScene()
         {
-            if (OnInit == null)
-                throw new OpenGLInitException("OnInit function is null.");
+            if (RenderingContext == null)
+                throw new OpenGLInitException("RenderingContext is null.");
             else
-                OnInit.Invoke();
+                RenderingContext.Init(this.Width, this.Height);
         }
 
         #endregion
@@ -243,7 +257,7 @@ namespace OpenGLWinControl
         }
 
         /// <summary>
-        ///     Invokes OnRender action.
+        ///     Invokes Render method.
         ///     Raises Control.Layout event.
         /// </summary>
         protected override void OnLayout(LayoutEventArgs e)
@@ -253,13 +267,13 @@ namespace OpenGLWinControl
         }
 
         /// <summary>
-        ///     Render the scene by raising OnRender event.
+        ///     Render the scene by invoking RenderingContext.Render method.
         /// </summary>
         public void Render()
         {
-            if (OnRender != null)
+            if (RenderingContext != null)
             {
-                OnRender();
+                RenderingContext.Render(this.Width, this.Height);
                 SwapBuffers();
             }
         }
@@ -267,7 +281,7 @@ namespace OpenGLWinControl
 
         /// <summary>
         ///     Swap control context buffers for double buffered render.
-        ///     Need to call after each OnRender() call.
+        ///     Need to call after each RenderingContext.Render call.
         /// </summary>
         protected void SwapBuffers()
         {
