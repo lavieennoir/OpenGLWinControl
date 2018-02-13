@@ -11,7 +11,7 @@ namespace OpenGLWinControl.OpenGL
     /// Containts static methods imported from GLU library.
     /// (Here you can find methods wich have prefix glu in source library)
     /// </summary>
-    public static class Glu
+    public static class GLU
     {
         [DllImport("glu32.dll", EntryPoint = "gluPerspective")]
         public static extern void Perspective(double fovy, double aspect, double zNear, double zFar);

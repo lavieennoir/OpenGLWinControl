@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenGLWinControl.OpenGL.Enumerations
+namespace OpenGLWinControl.OpenGL.Enumerations.GL
 {
     public enum ShadingModel : ushort
     {

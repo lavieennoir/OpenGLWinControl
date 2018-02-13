@@ -26,9 +26,9 @@ namespace OpenGLWinControl.OpenGL
         public static extern void Scale(double x, double y, double z);
 
         [DllImport("opengl32.dll", EntryPoint = "glRotatef")]
-        public static extern void Rotate(float x, float y, float z);
+        public static extern void Rotate(float angle, float x, float y, float z);
 
         [DllImport("opengl32.dll", EntryPoint = "glRotated")]
-        public static extern void Rotate(double x, double y, double z);
+        public static extern void Rotate(float angle, double x, double y, double z);
     }
 }

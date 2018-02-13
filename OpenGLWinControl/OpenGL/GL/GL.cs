@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using OpenGLWinControl.OpenGL.Enumerations;
+using OpenGLWinControl.OpenGL.Enumerations.GL;
 
 namespace OpenGLWinControl.OpenGL
 {
@@ -54,6 +54,21 @@ namespace OpenGLWinControl.OpenGL
         //B
 
 
+        [DllImport("opengl32.dll", EntryPoint = "glBitmap")]
+        private static extern void Bitmap(
+            int width, int height, float xOrig, float yOrig,
+            float xMove, float yMove, IntPtr bitmap);
+
+        public static void Bitmap(int width, int height, float xOrig, float yOrig,
+            float xMove, float yMove, byte[] bitmap) =>
+            InvokeWithArrayPointer(bitmap,
+                (ptr) => {
+                    Marshal.Copy(bitmap, 0, ptr, bitmap.Length);
+                    Bitmap(width, height, xOrig, yOrig,
+                        xMove, yMove, ptr);
+                });
+
+
         [DllImport("opengl32.dll", EntryPoint = "glBegin")]
         public static extern void Begin(BeginMode mode);
 
@@ -88,11 +103,19 @@ namespace OpenGLWinControl.OpenGL
         public static extern void Disable(Capability cap);
 
 
+        [DllImport("opengl32.dll", EntryPoint = "glDisableClientState")]
+        public static extern void DisableClientState(ClientSideCapability cap);
+
+        
         //E
 
 
         [DllImport("opengl32.dll", EntryPoint = "glEnable")]
         public static extern void Enable(Capability cap);
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glEnableClientState")]
+        public static extern void EnableClientState(ClientSideCapability cap);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glEnd")]
@@ -127,7 +150,11 @@ namespace OpenGLWinControl.OpenGL
 
         //L
 
-            
+
+        [DllImport("opengl32.dll", EntryPoint = "glLineWidth")]
+        public static extern void LineWidth(int width);
+
+
         [DllImport("opengl32.dll", EntryPoint = "glLoadIdentity")]
         public static extern void LoadIdentity();
 
@@ -153,8 +180,16 @@ namespace OpenGLWinControl.OpenGL
         //P
 
 
+        [DllImport("opengl32.dll", EntryPoint = "glPointSize")]
+        public static extern void PointSize(int width);
+
+
         [DllImport("opengl32.dll", EntryPoint = "glPopMatrix")]
         public static extern void PopMatrix();
+
+        
+        [DllImport("opengl32.dll", EntryPoint = "glPolygonMode")]
+        public static extern void PolygonMode(FacingMode face, PolygonMode mode);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glPushMatrix")]
@@ -174,13 +209,20 @@ namespace OpenGLWinControl.OpenGL
         public static extern void ShadeModel(ShadingModel mode);
 
 
+        [DllImport("opengl32.dll", EntryPoint = "glPixelStoref")]
+        public static extern void glPixelStore(PixelStoreParam pname, float param);
+
+        [DllImport("opengl32.dll", EntryPoint = "glPixelStorei")]
+        public static extern void glPixelStore(PixelStoreParam pname, int param);
+
+
         //T
 
 
         //U
 
 
-        //V
+        //V        
 
 
         [DllImport("opengl32.dll", EntryPoint = "glViewport")]

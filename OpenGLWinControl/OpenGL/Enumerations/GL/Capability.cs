@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenGLWinControl.OpenGL.Enumerations
+namespace OpenGLWinControl.OpenGL.Enumerations.GL
 {
     public enum Capability : ushort
     {
@@ -12,12 +12,12 @@ namespace OpenGLWinControl.OpenGL.Enumerations
         AUTO_NORMAL = 0x0D80,
         BLEND = 0x0BE2,
 
-        GL_CLIP_PLANE0 = 0x3000,
-        GL_CLIP_PLANE1 = 0x3001,
-        GL_CLIP_PLANE2 = 0x3002,
-        GL_CLIP_PLANE3 = 0x3003,
-        GL_CLIP_PLANE4 = 0x3004,
-        GL_CLIP_PLANE5 = 0x3005,
+        CLIP_PLANE0 = 0x3000,
+        CLIP_PLANE1 = 0x3001,
+        CLIP_PLANE2 = 0x3002,
+        CLIP_PLANE3 = 0x3003,
+        CLIP_PLANE4 = 0x3004,
+        CLIP_PLANE5 = 0x3005,
 
         COLOR_LOGIC_OP = 0x0BF2,
         COLOR_MATERIAL = 0x0B57,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenGLWinControl.OpenGL.Enumerations.GL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -38,7 +39,7 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glVertex3s")]
         public static extern void Vertex3s(short x, short y, short z);
-        
+
         [DllImport("opengl32.dll", EntryPoint = "glVertex4d")]
         public static extern void Vertex4d(double x, double y, double z, double w);
 
@@ -78,7 +79,7 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glVertex3sv")]
         private static extern void Vertex3sv(IntPtr v);
-        
+
         [DllImport("opengl32.dll", EntryPoint = "glVertex4dv")]
         private static extern void Vertex4dv(IntPtr v);
 
@@ -159,7 +160,7 @@ namespace OpenGLWinControl.OpenGL
                     Vertex3sv(ptr);
                 });
 
-        
+
         public static void Vertex4dv(double[] v) =>
             InvokeWithArrayPointer(v,
                 (ptr) => {
@@ -191,7 +192,7 @@ namespace OpenGLWinControl.OpenGL
                     Vertex4sv(ptr);
                 });
 
-        
+
         #endregion
     }
 }
