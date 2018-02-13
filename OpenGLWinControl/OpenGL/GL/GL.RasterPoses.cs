@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    //
-    //  This file imports functions
-    //  for matrix transforms
-    //
     public static partial class GL
     {
         #region Functions with value parameters
@@ -97,7 +93,7 @@ namespace OpenGLWinControl.OpenGL
         #region Functions with array pointer parameter wrappers
 
         public static void RasterPos2dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos2dv(ptr);
@@ -105,7 +101,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos2fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos2fv(ptr);
@@ -113,7 +109,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos2iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos2iv(ptr);
@@ -121,7 +117,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos2sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos2sv(ptr);
@@ -129,7 +125,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos3dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos3dv(ptr);
@@ -137,7 +133,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos3fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos3fv(ptr);
@@ -145,7 +141,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos3iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos3iv(ptr);
@@ -153,7 +149,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos3sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos3sv(ptr);
@@ -161,7 +157,7 @@ namespace OpenGLWinControl.OpenGL
 
         
         public static void RasterPos4dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos4dv(ptr);
@@ -169,7 +165,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos4fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos4fv(ptr);
@@ -177,7 +173,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos4iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos4iv(ptr);
@@ -185,7 +181,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void RasterPos4sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     RasterPos4sv(ptr);

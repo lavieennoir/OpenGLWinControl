@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL.Enumerations.GL
 {
-    public enum CoordinateDataType : ushort
+    public enum ClientAttributeMask : uint
     {
-        BYTE = 0x1400,
-        SHORT = 0x1402,
-        INT = 0x1404,
-        FLOAT = 0x1406,
-        DOUBLE = 0x140A
+        CLIENT_PIXEL_STORE_BIT = 0x00000001,
+        CLIENT_VERTEX_ARRAY_BIT = 0x00000002,
+        CLIENT_ALL_ATTRIB_BITS = 0xffffffff
     }
 }

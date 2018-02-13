@@ -16,52 +16,52 @@ namespace OpenGLWinControl.OpenGL
         #region Functions with value parameters
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3b")]
-        public static extern void Color3sb(sbyte red, sbyte green, sbyte blue);
+        public static extern void Color3(sbyte red, sbyte green, sbyte blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3d")]
-        public static extern void Color3d(double red, double green, double blue);
+        public static extern void Color3(double red, double green, double blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3f")]
-        public static extern void Color3f(float red, float green, float blue);
+        public static extern void Color3(float red, float green, float blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3i")]
-        public static extern void Color3i(int red, int green, int blue);
+        public static extern void Color3(int red, int green, int blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3s")]
-        public static extern void Color3s(short red, short green, short blue);
+        public static extern void Color3(short red, short green, short blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3ub")]
-        public static extern void Color3b(byte red, byte green, byte blue);
+        public static extern void Color3(byte red, byte green, byte blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3ui")]
-        public static extern void Color3ui(uint red, uint green, uint blue);
+        public static extern void Color3(uint red, uint green, uint blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3us")]
-        public static extern void Color3us(ushort red, ushort green, ushort blue);
+        public static extern void Color3(ushort red, ushort green, ushort blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4b")]
-        public static extern void Color4b(sbyte red, sbyte green, sbyte blue, sbyte alpha);
+        public static extern void Color4(sbyte red, sbyte green, sbyte blue, sbyte alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4d")]
-        public static extern void Color4d(double red, double green, double blue, double alpha);
+        public static extern void Color4(double red, double green, double blue, double alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4f")]
-        public static extern void Color4f(float red, float green, float blue, float alpha);
+        public static extern void Color4(float red, float green, float blue, float alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4i")]
-        public static extern void Color4i(int red, int green, int blue, int alpha);
+        public static extern void Color4(int red, int green, int blue, int alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4s")]
-        public static extern void Color4s(short red, short green, short blue, short alpha);
+        public static extern void Color4(short red, short green, short blue, short alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4ub")]
-        public static extern void Color4ub(byte red, byte green, byte blue, byte alpha);
+        public static extern void Color4(byte red, byte green, byte blue, byte alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4ui")]
-        public static extern void Color4ui(uint red, uint green, uint blue, uint alpha);
+        public static extern void Color4(uint red, uint green, uint blue, uint alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4us")]
-        public static extern void Color4us(ushort red, ushort green, ushort blue, ushort alpha);
+        public static extern void Color4(ushort red, ushort green, ushort blue, ushort alpha);
 
         #endregion
 
@@ -101,128 +101,128 @@ namespace OpenGLWinControl.OpenGL
 
         #region Functions with array pointer parameter wrappers
 
-        public static void Color3sbv(sbyte[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(sbyte[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v.Select(x => (byte)(x - sbyte.MinValue)).ToArray(), 0, ptr, v.Length);
                     Color3bv(ptr);
                 });
 
 
-        public static void Color3dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(double[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color3dv(ptr);
                 });
 
 
-        public static void Color3fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(float[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color3fv(ptr);
                 });
 
 
-        public static void Color3iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(int[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color3iv(ptr);
                 });
 
 
-        public static void Color3sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(short[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color3sv(ptr);
                 });
 
 
-        public static void Color3bv(byte[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(byte[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color3bv(ptr);
                 });
 
 
-        public static void Color3uiv(uint[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(uint[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v.Select(x => (int)(x + int.MinValue)).ToArray(), 0, ptr, v.Length);
                     Color3iv(ptr);
                 });
 
 
-        public static void Color3usv(ushort[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color3(ushort[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v.Select(x => (short)(x + short.MinValue)).ToArray(), 0, ptr, v.Length);
                     Color3sv(ptr);
                 });
 
 
-        public static void Color4sbv(sbyte[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(sbyte[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v.Select(x => (byte)(x - sbyte.MinValue)).ToArray(), 0, ptr, v.Length);
                     Color4bv(ptr);
                 });
 
 
-        public static void Color4dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(double[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color4dv(ptr);
                 });
 
 
-        public static void Color4fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(float[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color4fv(ptr);
                 });
 
 
-        public static void Color4iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(int[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color4iv(ptr);
                 });
 
 
-        public static void Color4sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(short[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color4sv(ptr);
                 });
 
 
-        public static void Color4bv(byte[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(byte[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Color4bv(ptr);
                 });
 
 
-        public static void Color4uiv(uint[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(uint[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v.Select(x => (int)(x + int.MinValue)).ToArray(), 0, ptr, v.Length);
                     Color4iv(ptr);
                 });
 
 
-        public static void Color4usv(ushort[] v) =>
-            InvokeWithArrayPointer(v,
+        public static void Color4(ushort[] v) =>
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v.Select(x => (short)(x - short.MinValue)).ToArray(), 0, ptr, v.Length);
                     Color4sv(ptr);

@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    //
-    //  This file imports functions
-    //  for matrix transforms
-    //
     public static partial class GL
     {
         #region Functions with value parameters
@@ -49,7 +45,7 @@ namespace OpenGLWinControl.OpenGL
         #region Functions with array pointer parameter wrappers
 
         public static void Rectdv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Rectdv(ptr);
@@ -57,7 +53,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void Rectfv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Rectfv(ptr);
@@ -65,7 +61,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void Rectiv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Rectiv(ptr);
@@ -73,7 +69,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void Rectsv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     Rectsv(ptr);

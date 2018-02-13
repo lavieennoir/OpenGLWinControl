@@ -8,10 +8,6 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    //
-    //  This file imports functions
-    //  for matrix transforms
-    //
     public static partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glDrawElements")]
@@ -21,7 +17,7 @@ namespace OpenGLWinControl.OpenGL
 
         public static void DrawElements(BeginMode mode, int size, byte[] indexes)
         {
-            InvokeWithArrayPointer(indexes,
+            InvokeWithArrayPointer(ref indexes,
                 (ptr) =>
                 {
                     Marshal.Copy(indexes, 0, ptr, indexes.Length);
@@ -33,7 +29,7 @@ namespace OpenGLWinControl.OpenGL
         public static void DrawElements(BeginMode mode, int size, ushort[] indexes)
         {
             var arr = indexes.Select(x => (short)x).ToArray();
-            InvokeWithArrayPointer(arr,
+            InvokeWithArrayPointer(ref arr,
                 (ptr) =>
                 {
                     Marshal.Copy(arr, 0, ptr, arr.Length);
@@ -45,7 +41,7 @@ namespace OpenGLWinControl.OpenGL
         public static void DrawElements(BeginMode mode, int size, uint[] indexes)
         {
             var arr = indexes.Select(x => (int)x).ToArray();
-            InvokeWithArrayPointer(arr,
+            InvokeWithArrayPointer(ref arr,
                 (ptr) =>
                 {
                     Marshal.Copy(arr, 0, ptr, indexes.Length);

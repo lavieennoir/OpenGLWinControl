@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    //
-    //  This file imports functions
-    //  for matrix transforms
-    //
     public static partial class GL
     {
         #region Functions with value parameters
@@ -121,7 +117,7 @@ namespace OpenGLWinControl.OpenGL
         #region Functions with array pointer parameter wrappers
 
         public static void TexCoord1dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord1dv(ptr);
@@ -129,7 +125,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord1fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord1fv(ptr);
@@ -137,7 +133,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord1iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord1iv(ptr);
@@ -145,7 +141,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord1sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord1sv(ptr);
@@ -153,7 +149,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord2dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord2dv(ptr);
@@ -161,7 +157,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord2fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord2fv(ptr);
@@ -169,7 +165,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord2iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord2iv(ptr);
@@ -177,7 +173,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord2sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord2sv(ptr);
@@ -185,7 +181,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord3dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord3dv(ptr);
@@ -193,7 +189,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord3fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord3fv(ptr);
@@ -201,7 +197,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord3iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord3iv(ptr);
@@ -209,7 +205,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord3sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord3sv(ptr);
@@ -217,7 +213,7 @@ namespace OpenGLWinControl.OpenGL
 
         
         public static void TexCoord4dv(double[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord4dv(ptr);
@@ -225,7 +221,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord4fv(float[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord4fv(ptr);
@@ -233,7 +229,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord4iv(int[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord4iv(ptr);
@@ -241,7 +237,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         public static void TexCoord4sv(short[] v) =>
-            InvokeWithArrayPointer(v,
+            InvokeWithArrayPointer(ref v,
                 (ptr) => {
                     Marshal.Copy(v, 0, ptr, v.Length);
                     TexCoord4sv(ptr);

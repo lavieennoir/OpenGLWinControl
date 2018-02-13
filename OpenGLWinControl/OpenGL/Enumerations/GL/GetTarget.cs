@@ -8,6 +8,8 @@ namespace OpenGLWinControl.OpenGL.Enumerations.GL
 {
     public enum GetTarget : ushort
     {
+        ALPHA_SCALE = 0x0D1C,
+        ALPHA_BIAS = 0x0D1D,
         CURRENT_COLOR = 0x0B00,
         CURRENT_INDEX = 0x0B01,
         CURRENT_NORMAL = 0x0B02,
@@ -158,8 +160,6 @@ namespace OpenGLWinControl.OpenGL.Enumerations.GL
         GREEN_BIAS = 0x0D19,
         BLUE_SCALE = 0x0D1A,
         BLUE_BIAS = 0x0D1B,
-        ALPHA_SCALE = 0x0D1C,
-        ALPHA_BIAS = 0x0D1D,
         DEPTH_SCALE = 0x0D1E,
         DEPTH_BIAS = 0x0D1F,
         MAX_EVAL_ORDER = 0x0D30,
@@ -216,6 +216,6 @@ namespace OpenGLWinControl.OpenGL.Enumerations.GL
         FEEDBACK_BUFFER_SIZE = 0x0DF1,
         FEEDBACK_BUFFER_TYPE = 0x0DF2,
         SELECTION_BUFFER_POINTER = 0x0DF3,
-        SELECTION_BUFFER_SIZE = 0x0DF4,
+        SELECTION_BUFFER_SIZE = 0x0DF4
     }
 }
