@@ -43,27 +43,27 @@ namespace OpenGLWinControl.OpenGL
                 (ptr) =>
                 {
                     Marshal.Copy(param, 0, ptr, param.Length);
-                    GetBooleanv(pname, ptr);
+                    GetFloatv(pname, ptr);
                     Marshal.Copy(ptr, param, 0, param.Length);
                 });
 
 
-        public static void GetFloatv(GetTarget pname, double[] param) =>
+        public static void GetDoublev(GetTarget pname, double[] param) =>
             InvokeWithArrayPointer(ref param,
                 (ptr) =>
                 {
                     Marshal.Copy(param, 0, ptr, param.Length);
-                    GetBooleanv(pname, ptr);
+                    GetDoublev(pname, ptr);
                     Marshal.Copy(ptr, param, 0, param.Length);
                 });
 
 
-        public static void GetFloatv(GetTarget pname, int[] param) =>
+        public static void GetIntegerv(GetTarget pname, int[] param) =>
             InvokeWithArrayPointer(ref param,
                 (ptr) =>
                 {
                     Marshal.Copy(param, 0, ptr, param.Length);
-                    GetBooleanv(pname, ptr);
+                    GetIntegerv(pname, ptr);
                     Marshal.Copy(ptr, param, 0, param.Length);
                 });
     }

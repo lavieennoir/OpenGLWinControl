@@ -16,5 +16,8 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("glu32.dll", EntryPoint = "gluPerspective")]
         public static extern void Perspective(double fovy, double aspect, double zNear, double zFar);
 
+        [DllImport("glu32.dll", EntryPoint = "gluOrtho2D")]
+        public static extern void Ortho2D(double left, double right, double bottom, double top);
+
     }
 }

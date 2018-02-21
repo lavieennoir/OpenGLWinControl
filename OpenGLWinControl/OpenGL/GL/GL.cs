@@ -260,7 +260,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         [DllImport("opengl32.dll", EntryPoint = "glLineWidth")]
-        public static extern void LineWidth(int width);
+        public static extern void LineWidth(float width);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glListBase")]
@@ -269,6 +269,14 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glLoadIdentity")]
         public static extern void LoadIdentity();
+        
+
+        [DllImport("opengl32.dll", EntryPoint = "glLoadMatrixd")]
+        public static extern void LoadMatrix(double[] matrix);
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glLoadMatrixf")]
+        public static extern void LoadMatrix(float[] matrix);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glLoadName")]
@@ -297,6 +305,14 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glMatrixMode")]
         public static extern void MatrixMode(MatrixMode mode);
+
+        
+        [DllImport("opengl32.dll", EntryPoint = "glMultMatrixd")]
+        public static extern void MultMatrix(double[] martix);
+
+
+        [DllImport("opengl32.dll", EntryPoint = "glMultMatrixf")]
+        public static extern void MultMatrix(float[] matrix);
 
 
         //N
@@ -338,7 +354,7 @@ namespace OpenGLWinControl.OpenGL
 
 
         [DllImport("opengl32.dll", EntryPoint = "glPointSize")]
-        public static extern void PointSize(int width);
+        public static extern void PointSize(float width);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glPolygonMode")]
