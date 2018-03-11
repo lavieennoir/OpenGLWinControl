@@ -141,12 +141,31 @@ namespace OpenGLWinControl.OpenGL
                 });
 
 
-        public static void Color3(byte[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color3bv(ptr);
-                });
+        static IntPtr color3bv = IntPtr.Zero;
+
+        public static void Color3(byte[] v) 
+        {
+            int ptrLen = 3;
+            if (v == null || v.Length != ptrLen)
+                throw new ArgumentException("Array has not enough elements.");
+            if (color3bv.Equals(IntPtr.Zero))
+                color3bv = Marshal.AllocHGlobal(Marshal.SizeOf(v[0]) * ptrLen);
+            try
+            {
+                Marshal.Copy(v, 0, color3bv, v.Length);
+                Color4bv(color3bv);
+            }
+            catch (Exception e)
+            {
+                color3bv = IntPtr.Zero;
+                throw new ArgumentException("Can`t cast to unmanaged array.", e);
+            }
+        }
+        //InvokeWithArrayPointer(ref v,
+        //        (ptr) => {
+        //            Marshal.Copy(v, 0, ptr, v.Length);
+        //            Color3bv(ptr);
+        //        });
 
 
         public static void Color3(uint[] v) =>
@@ -204,13 +223,33 @@ namespace OpenGLWinControl.OpenGL
                     Color4sv(ptr);
                 });
 
+        
+        static IntPtr color4bv = IntPtr.Zero;
 
-        public static void Color4(byte[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color4bv(ptr);
-                });
+        public static void Color4(byte[] v)
+        {
+            int ptrLen = 4;
+            if (v == null || v.Length != ptrLen)
+                throw new ArgumentException("Array has not enough elements.");
+            if (color4bv.Equals(IntPtr.Zero))
+                color4bv = Marshal.AllocHGlobal(Marshal.SizeOf(v[0]) * ptrLen);
+            try
+            {
+                Marshal.Copy(v, 0, color4bv, v.Length);
+                Color4bv(color4bv);
+            }
+            catch (Exception e)
+            {
+                //Marshal.FreeHGlobal(ptr);
+                color4bv = IntPtr.Zero;
+                throw new ArgumentException("Can`t cast to unmanaged array.", e);
+            }
+        }
+            //InvokeWithArrayPointer(ref v,
+            //    (ptr) => {
+            //        Marshal.Copy(v, 0, ptr, v.Length);
+            //        Color4bv(ptr);
+            //    });
 
 
         public static void Color4(uint[] v) =>

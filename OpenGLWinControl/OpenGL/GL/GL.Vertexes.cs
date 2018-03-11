@@ -17,7 +17,7 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glVertex2f")]
         public static extern void Vertex2(float x, float y);
-
+        
         [DllImport("opengl32.dll", EntryPoint = "glVertex2i")]
         public static extern void Vertex2(int x, int y);
 
