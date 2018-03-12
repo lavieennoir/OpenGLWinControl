@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glGetString")]
         private static extern IntPtr getString(InfoStringName name);
 
 
-        public static string GetString(InfoStringName name)
+        public string GetString(InfoStringName name)
         {
             byte[] buf = new byte[256];
             InvokeWithArrayPointer(ref buf,

@@ -7,22 +7,30 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         #region Functions with value parameters
 
         [DllImport("opengl32.dll", EntryPoint = "glRectd")]
-        public static extern void Rectd(double x1, double y1, double x2, double y2);
+        static extern void rectd(double x1, double y1, double x2, double y2);
+        public void Rect(double x1, double y1, double x2, double y2) =>
+             rectd(x1, y1, x2, y2);
 
         [DllImport("opengl32.dll", EntryPoint = "glRectf")]
-        public static extern void Rectf(float x1, float y1, float x2, float y2);
+        static extern void rectf(float x1, float y1, float x2, float y2);
+        public void Rect(float x1, float y1, float x2, float y2) =>
+             rectf(x1, y1, x2, y2);
 
         [DllImport("opengl32.dll", EntryPoint = "glRecti")]
-        public static extern void Recti(int x1, int y1, int x2, int y2);
+        static extern void recti(int x1, int y1, int x2, int y2);
+        public void Rect(int x1, int y1, int x2, int y2) =>
+             recti(x1, y1, x2, y2);
 
         [DllImport("opengl32.dll", EntryPoint = "glRects")]
-        public static extern void Rects(short x1, short y1, short x2, short y2);
-        
+        static extern void rects(short x1, short y1, short x2, short y2);
+        public void Rect(short x1, short y1, short x2, short y2) =>
+             rects(x1, y1, x2, y2);
+
         #endregion
 
         #region Functions with array pointer parameter import
@@ -38,42 +46,46 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glRectsv")]
         private static extern void Rectsv(IntPtr v);
-        
+
 
         #endregion
 
         #region Functions with array pointer parameter wrappers
 
-        public static void Rectdv(double[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Rectdv(ptr);
-                });
+        public void Rectdv(double[] v)
+        {
+            if (v == null || v.Length > HeapData.RectdvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRectdv, v.Length);
+            Rectdv(HeapData.ptrRectdv);
+        }
 
 
-        public static void Rectfv(float[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Rectfv(ptr);
-                });
+        public void Rectfv(float[] v)
+        {
+            if (v == null || v.Length > HeapData.RectfvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRectfv, v.Length);
+            Rectfv(HeapData.ptrRectfv);
+        }
 
 
-        public static void Rectiv(int[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Rectiv(ptr);
-                });
+        public void Rectiv(int[] v)
+        {
+            if (v == null || v.Length > HeapData.RectivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRectiv, v.Length);
+            Rectiv(HeapData.ptrRectiv);
+        }
 
 
-        public static void Rectsv(short[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Rectsv(ptr);
-                });
+        public void Rectsv(short[] v)
+        {
+            if (v == null || v.Length > HeapData.RectsvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRectsv, v.Length);
+            Rectsv(HeapData.ptrRectsv);
+        }
         
         #endregion
     }

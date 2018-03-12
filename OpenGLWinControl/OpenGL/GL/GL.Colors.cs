@@ -11,261 +11,302 @@ namespace OpenGLWinControl.OpenGL
     //  This file imports functions
     //  wich starts with glColor
     //
-    public static partial class GL
+    public partial class GL
     {
         #region Functions with value parameters
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3b")]
-        public static extern void Color3(sbyte red, sbyte green, sbyte blue);
+        static extern void color3(sbyte red, sbyte green, sbyte blue);
+
+        public void Color3(sbyte red, sbyte green, sbyte blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3d")]
-        public static extern void Color3(double red, double green, double blue);
+        static extern void color3(double red, double green, double blue);
+
+        public void Color3(double red, double green, double blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3f")]
-        public static extern void Color3(float red, float green, float blue);
+        static extern void color3(float red, float green, float blue);
+
+        public void Color3(float red, float green, float blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3i")]
-        public static extern void Color3(int red, int green, int blue);
+        static extern void color3(int red, int green, int blue);
+
+        public void Color3(int red, int green, int blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3s")]
-        public static extern void Color3(short red, short green, short blue);
+        static extern void color3(short red, short green, short blue);
+
+        public void Color3(short red, short green, short blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3ub")]
-        public static extern void Color3(byte red, byte green, byte blue);
+        static extern void color3(byte red, byte green, byte blue);
+
+        public void Color3(byte red, byte green, byte blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3ui")]
-        public static extern void Color3(uint red, uint green, uint blue);
+        static extern void color3(uint red, uint green, uint blue);
+
+        public void Color3(uint red, uint green, uint blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3us")]
-        public static extern void Color3(ushort red, ushort green, ushort blue);
+        static extern void color3(ushort red, ushort green, ushort blue);
+
+        public void Color3(ushort red, ushort green, ushort blue) =>
+            color3(red, green, blue);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4b")]
-        public static extern void Color4(sbyte red, sbyte green, sbyte blue, sbyte alpha);
+        static extern void color4(sbyte red, sbyte green, sbyte blue, sbyte alpha);
+
+        public void Color4(sbyte red, sbyte green, sbyte blue, sbyte alpha) =>
+            color4(red, green, blue, alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4d")]
-        public static extern void Color4(double red, double green, double blue, double alpha);
+        static extern void color4(double red, double green, double blue, double alpha);
+
+        public void Color4(double red, double green, double blue, double alpha) =>
+            color4(red, green, blue, alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4f")]
-        public static extern void Color4(float red, float green, float blue, float alpha);
+        static extern void color4(float red, float green, float blue, float alpha);
+
+        public void Color4(float red, float green, float blue, float alpha) =>
+            color4(red, green, blue, alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4i")]
-        public static extern void Color4(int red, int green, int blue, int alpha);
+        static extern void color4(int red, int green, int blue, int alpha);
+
+        public void Color4(int red, int green, int blue, int alpha) =>
+            color4(red, green, blue, alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4s")]
-        public static extern void Color4(short red, short green, short blue, short alpha);
+        static extern void color4(short red, short green, short blue, short alpha);
+
+        public void Color4(short red, short green, short blue, short alpha) =>
+            color4(red, green, blue, alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4ub")]
-        public static extern void Color4(byte red, byte green, byte blue, byte alpha);
+        static extern void color4(byte red, byte green, byte blue, byte alpha);
+
+        public void Color4(byte red, byte green, byte blue, byte alpha) =>
+            color4(red, green, blue, alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4ui")]
-        public static extern void Color4(uint red, uint green, uint blue, uint alpha);
+        static extern void color4(uint red, uint green, uint blue, uint alpha);
+
+        public void Color4(uint red, uint green, uint blue, uint alpha) =>
+            color4(red, green, blue, alpha);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4us")]
-        public static extern void Color4(ushort red, ushort green, ushort blue, ushort alpha);
+        static extern void color4(ushort red, ushort green, ushort blue, ushort alpha);
+
+        public void Color4(ushort red, ushort green, ushort blue, ushort alpha) =>
+            color4(red, green, blue, alpha);
 
         #endregion
 
         #region Functions with array pointer parameter import
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3dv")]
-        private static extern void Color3dv(IntPtr v);
+        static extern void Color3dv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3fv")]
-        private static extern void Color3fv(IntPtr v);
+        static extern void Color3fv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3iv")]
-        private static extern void Color3iv(IntPtr v);
+        static extern void Color3iv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3sv")]
-        private static extern void Color3sv(IntPtr v);
+        static extern void Color3sv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor3ubv")]
-        private static extern void Color3bv(IntPtr v);
+        static extern void Color3bv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4dv")]
-        private static extern void Color4dv(IntPtr v);
+        static extern void Color4dv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4fv")]
-        private static extern void Color4fv(IntPtr v);
+        static extern void Color4fv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4iv")]
-        private static extern void Color4iv(IntPtr v);
+        static extern void Color4iv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4sv")]
-        private static extern void Color4sv(IntPtr v);
+        static extern void Color4sv(IntPtr v);
 
         [DllImport("opengl32.dll", EntryPoint = "glColor4ubv")]
-        private static extern void Color4bv(IntPtr v);
+        static extern void Color4bv(IntPtr v);
 
         #endregion
 
         #region Functions with array pointer parameter wrappers
 
-        public static void Color3(sbyte[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v.Select(x => (byte)(x - sbyte.MinValue)).ToArray(), 0, ptr, v.Length);
-                    Color3bv(ptr);
-                });
-
-
-        public static void Color3(double[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color3dv(ptr);
-                });
-
-
-        public static void Color3(float[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color3fv(ptr);
-                });
-
-
-        public static void Color3(int[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color3iv(ptr);
-                });
-
-
-        public static void Color3(short[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color3sv(ptr);
-                });
-
-
-        static IntPtr color3bv = IntPtr.Zero;
-
-        public static void Color3(byte[] v) 
+        public void Color3(sbyte[] v)
         {
-            int ptrLen = 3;
-            if (v == null || v.Length != ptrLen)
-                throw new ArgumentException("Array has not enough elements.");
-            if (color3bv.Equals(IntPtr.Zero))
-                color3bv = Marshal.AllocHGlobal(Marshal.SizeOf(v[0]) * ptrLen);
-            try
-            {
-                Marshal.Copy(v, 0, color3bv, v.Length);
-                Color4bv(color3bv);
-            }
-            catch (Exception e)
-            {
-                color3bv = IntPtr.Zero;
-                throw new ArgumentException("Can`t cast to unmanaged array.", e);
-            }
+            if (v == null || v.Length != HeapData.Color3sbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v.Select(x => (byte)(x + sbyte.MaxValue)).ToArray(), 0, HeapData.ptrColor3sbv, v.Length);
+            Color4bv(HeapData.ptrColor3sbv);
         }
-        //InvokeWithArrayPointer(ref v,
-        //        (ptr) => {
-        //            Marshal.Copy(v, 0, ptr, v.Length);
-        //            Color3bv(ptr);
-        //        });
 
 
-        public static void Color3(uint[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v.Select(x => (int)(x + int.MinValue)).ToArray(), 0, ptr, v.Length);
-                    Color3iv(ptr);
-                });
-
-
-        public static void Color3(ushort[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v.Select(x => (short)(x + short.MinValue)).ToArray(), 0, ptr, v.Length);
-                    Color3sv(ptr);
-                });
-
-
-        public static void Color4(sbyte[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v.Select(x => (byte)(x - sbyte.MinValue)).ToArray(), 0, ptr, v.Length);
-                    Color4bv(ptr);
-                });
-
-
-        public static void Color4(double[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color4dv(ptr);
-                });
-
-
-        public static void Color4(float[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color4fv(ptr);
-                });
-
-
-        public static void Color4(int[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color4iv(ptr);
-                });
-
-
-        public static void Color4(short[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Color4sv(ptr);
-                });
-
-        
-        static IntPtr color4bv = IntPtr.Zero;
-
-        public static void Color4(byte[] v)
+        public void Color3(double[] v)
         {
-            int ptrLen = 4;
-            if (v == null || v.Length != ptrLen)
-                throw new ArgumentException("Array has not enough elements.");
-            if (color4bv.Equals(IntPtr.Zero))
-                color4bv = Marshal.AllocHGlobal(Marshal.SizeOf(v[0]) * ptrLen);
-            try
-            {
-                Marshal.Copy(v, 0, color4bv, v.Length);
-                Color4bv(color4bv);
-            }
-            catch (Exception e)
-            {
-                //Marshal.FreeHGlobal(ptr);
-                color4bv = IntPtr.Zero;
-                throw new ArgumentException("Can`t cast to unmanaged array.", e);
-            }
+            if (v == null || v.Length != HeapData.Color3dvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor3dv, v.Length);
+            Color3dv(HeapData.ptrColor3dv);
         }
-            //InvokeWithArrayPointer(ref v,
-            //    (ptr) => {
-            //        Marshal.Copy(v, 0, ptr, v.Length);
-            //        Color4bv(ptr);
-            //    });
 
 
-        public static void Color4(uint[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v.Select(x => (int)(x + int.MinValue)).ToArray(), 0, ptr, v.Length);
-                    Color4iv(ptr);
-                });
+
+        public void Color3(float[] v)
+        {
+            if (v == null || v.Length != HeapData.Color3fvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor3fv, v.Length);
+            Color3fv(HeapData.ptrColor3fv);
+        }
 
 
-        public static void Color4(ushort[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v.Select(x => (short)(x - short.MinValue)).ToArray(), 0, ptr, v.Length);
-                    Color4sv(ptr);
-                });
+        public void Color3(int[] v)
+        {
+            if (v == null || v.Length != HeapData.Color3ivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor3iv, v.Length);
+            Color3iv(HeapData.ptrColor3iv);
+        }
+
+
+        public void Color3(short[] v)
+        {
+            if (v == null || v.Length != HeapData.Color3svMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor3sv, v.Length);
+            Color3sv(HeapData.ptrColor3sv);
+        }
+
+
+        public void Color3(byte[] v)
+        {
+            if (v == null || v.Length != HeapData.Color3bvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor3bv, v.Length);
+            Color3bv(HeapData.ptrColor3bv);
+        }
+
+        public void Color3(uint[] v)
+        {
+            if (v == null || v.Length != HeapData.Color3uivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v.Select(x => (int)(x - int.MaxValue)).ToArray(), 0, HeapData.ptrColor3uiv, v.Length);
+            Color3iv(HeapData.ptrColor3uiv);
+        }
+
+
+        public void Color3(ushort[] v)
+        {
+            if (v == null || v.Length != HeapData.Color3usvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v.Select(x => (short)(x - short.MaxValue)).ToArray(), 0, HeapData.ptrColor3usv, v.Length);
+            Color3sv(HeapData.ptrColor3usv);
+        }
+
+
+        public void Color4(sbyte[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4sbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v.Select(x => (byte)(x + byte.MaxValue)).ToArray(), 0, HeapData.ptrColor4sbv, v.Length);
+            Color4bv(HeapData.ptrColor4sbv);
+        }
+
+
+        public void Color4(double[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4dvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor4dv, v.Length);
+            Color4dv(HeapData.ptrColor4dv);
+        }
+
+
+        public void Color4(float[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4fvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor4fv, v.Length);
+            Color4fv(HeapData.ptrColor4fv);
+        }
+
+
+        public void Color4(int[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4ivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor4iv, v.Length);
+            Color4iv(HeapData.ptrColor4iv);
+        }
+
+
+        public void Color4(short[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4svMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor4sv, v.Length);
+            Color4sv(HeapData.ptrColor4sv);
+        }
+
+
+        public void Color4(byte[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4bvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrColor4bv, v.Length);
+            Color4bv(HeapData.ptrColor4bv);
+        }
+
+
+        public void Color4(uint[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4uivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v.Select(x => (int)(x - int.MaxValue)).ToArray(), 0, HeapData.ptrColor4uiv, v.Length);
+            Color4iv(HeapData.ptrColor4uiv);
+        }
+
+
+        public void Color4(ushort[] v)
+        {
+            if (v == null || v.Length != HeapData.Color4usvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v.Select(x => (short)(x - short.MaxValue)).ToArray(), 0, HeapData.ptrColor4usv, v.Length);
+            Color4sv(HeapData.ptrColor4usv);
+        }
 
         #endregion
     }

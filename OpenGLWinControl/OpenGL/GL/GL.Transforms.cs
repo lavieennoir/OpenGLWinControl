@@ -11,24 +11,36 @@ namespace OpenGLWinControl.OpenGL
     //  This file imports functions
     //  for matrix transforms
     //
-    public static partial class GL
+    public partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glTranslatef")]
-        public static extern void Translate(float x, float y, float z);
+        static extern void translate(float x, float y, float z);
+        public void Translate(float x, float y, float z)=>
+            translate(x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glTranslated")]
-        public static extern void Translate(double x, double y, double z);
+        static extern void translate(double x, double y, double z);
+        public void Translate(double x, double y, double z) =>
+             translate(x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glScalef")]
-        public static extern void Scale(float x, float y, float z);
+        static extern void scale(float x, float y, float z);
+        public void Scale(float x, float y, float z)=>
+            scale(x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glScaled")]
-        public static extern void Scale(double x, double y, double z);
+        static extern void scale(double x, double y, double z);
+        public void Scale(double x, double y, double z) =>
+            scale(x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glRotatef")]
-        public static extern void Rotate(float angle, float x, float y, float z);
+        static extern void rotate(float angle, float x, float y, float z);
+        public void Rotate(float angle, float x, float y, float z)=>
+            rotate(angle,  x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glRotated")]
-        public static extern void Rotate(float angle, double x, double y, double z);
+        static extern void rotate(double angle, double x, double y, double z);
+        public void Rotate(double angle, double x, double y, double z) =>
+            rotate(angle, x, y, z);
     }
 }

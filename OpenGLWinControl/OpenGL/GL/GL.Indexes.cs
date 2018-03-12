@@ -7,25 +7,35 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         #region Functions with value parameters
 
         [DllImport("opengl32.dll", EntryPoint = "glIndexd")]
-        public static extern void Index(double c);
+        static extern void index(double c);
+        public void Index(double c) =>
+            index(c);
 
         [DllImport("opengl32.dll", EntryPoint = "glIndexf")]
-        public static extern void Index(float c);
+        static extern void index(float c);
+        public void Index(float c) =>
+            index(c);
 
         [DllImport("opengl32.dll", EntryPoint = "glIndexi")]
-        public static extern void Index(int c);
+        static extern void index(int c);
+        public void Index(int c) =>
+            index(c);
 
         [DllImport("opengl32.dll", EntryPoint = "glIndexs")]
-        public static extern void Index(short c);
+        static extern void index(short c);
+        public void Index(short c) =>
+            index(c);
 
         [DllImport("opengl32.dll", EntryPoint = "glIndexub")]
-        public static extern void Index(byte c);
-        
+        static extern void index(byte c);
+        public void Index(byte c) =>
+            index(c);
+
         #endregion
 
         #region Functions with array pointer parameter import
@@ -49,43 +59,54 @@ namespace OpenGLWinControl.OpenGL
 
         #region Functions with array pointer parameter wrappers
         
-        public static void Index(double[] v) =>
+        public void Index(double[] v) =>
             InvokeWithArrayPointer(ref v,
                 (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Indexdv(ptr);
+                    if (v == null || v.Length > HeapData.IndexdvMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+
+                    Marshal.Copy(v, 0, HeapData.ptrIndexdv, v.Length);
+                    Indexdv(HeapData.ptrIndexdv);
                 });
 
 
-        public static void Index(float[] v) =>
+        public void Index(float[] v) =>
             InvokeWithArrayPointer(ref v,
                 (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Indexfv(ptr);
+                    if (v == null || v.Length > HeapData.IndexfvMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(v, 0, HeapData.ptrIndexfv, v.Length);
+                    Indexfv(HeapData.ptrIndexfv);
                 });
 
 
-        public static void Index(int[] v) =>
+        public void Index(int[] v) =>
             InvokeWithArrayPointer(ref v,
                 (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Indexiv(ptr);
+                    if (v == null || v.Length > HeapData.IndexivMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(v, 0, HeapData.ptrIndexiv, v.Length);
+                    Indexiv(HeapData.ptrIndexiv);
                 });
 
 
-        public static void Index(short[] v) =>
+        public void Index(short[] v) =>
             InvokeWithArrayPointer(ref v,
                 (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Indexsv(ptr);
+                    if (v == null || v.Length > HeapData.IndexsvMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(v, 0, HeapData.ptrIndexsv, v.Length);
+                    Indexsv(HeapData.ptrIndexsv);
                 });
 
 
-        public static void Index(byte[] v) =>
+        public void Index(byte[] v) =>
             InvokeWithArrayPointer(ref v,
                 (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    Indexbv(ptr);
+                    if (v == null || v.Length > HeapData.IndexdvMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(v, 0, HeapData.ptrIndexbv, v.Length);
+                    Indexbv(HeapData.ptrIndexbv);
                 });
 
         

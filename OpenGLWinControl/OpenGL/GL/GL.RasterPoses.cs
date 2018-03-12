@@ -7,45 +7,69 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         #region Functions with value parameters
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos2d")]
-        public static extern void RasterPos2d(double x, double y);
+        static extern void rasterPos2d(double x, double y);
+        public void RasterPos2(double x, double y) =>
+            rasterPos2d(x, y);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos2f")]
-        public static extern void RasterPos2f(float x, float y);
+        static extern void rasterPos2f(float x, float y);
+        public void RasterPos2(float x, float y) =>
+            rasterPos2f(x, y);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos2i")]
-        public static extern void RasterPos2i(int x, int y);
+        static extern void rasterPos2i(int x, int y);
+        public void RasterPos2(int x, int y) =>
+            rasterPos2f(x, y);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos2s")]
-        public static extern void RasterPos2s(short x, short y);
+        static extern void rasterPos2s(short x, short y);
+        public void RasterPos2(short x, short y) =>
+            rasterPos2f(x, y);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos3d")]
-        public static extern void RasterPos3d(double x, double y, double z);
+        static extern void rasterPos3d(double x, double y, double z);
+        public void RasterPos3(double x, double y, double z) =>
+            rasterPos3d(x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos3f")]
-        public static extern void RasterPos3f(float x, float y, float z);
+        static extern void rasterPos3f(float x, float y, float z);
+        public void RasterPos3(float x, float y, float z) =>
+            rasterPos3d(x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos3i")]
-        public static extern void RasterPos3i(int x, int y, int z);
+        static extern void rasterPos3i(int x, int y, int z);
+        public void RasterPos3(int x, int y, int z) =>
+            rasterPos3d(x, y, z);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos3s")]
-        public static extern void RasterPos3s(short x, short y, short z);
-        
+        static extern void rasterPos3s(short x, short y, short z);
+        public void RasterPos3(short x, short y, short z) =>
+            rasterPos3d(x, y, z);
+
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos4d")]
-        public static extern void RasterPos4d(double x, double y, double z, double w);
+        static extern void rasterPos4d(double x, double y, double z, double w);
+        public void RasterPos4(double x, double y, double z, double w) =>
+            rasterPos4d(x, y, z, w);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos4f")]
-        public static extern void RasterPos4f(float x, float y, float z, float w);
+        static extern void rasterPos4f(float x, float y, float z, float w);
+        public void RasterPos4(float x, float y, float z, float w) =>
+            rasterPos4d(x, y, z, w);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos4i")]
-        public static extern void RasterPos4i(int x, int y, int z, int w);
+        static extern void rasterPos4i(int x, int y, int z, int w);
+        public void RasterPos4(int x, int y, int z, int w) =>
+            rasterPos4d(x, y, z, w);
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos4s")]
-        public static extern void RasterPos4s(short x, short y, short z, short w);
+        static extern void rasterPos4s(short x, short y, short z, short w);
+        public void RasterPos4(short x, short y, short z, short w) =>
+            rasterPos4d(x, y, z, w);
 
         #endregion
 
@@ -74,7 +98,7 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos3sv")]
         private static extern void RasterPos3sv(IntPtr v);
-        
+
         [DllImport("opengl32.dll", EntryPoint = "glRasterPos4dv")]
         private static extern void RasterPos4dv(IntPtr v);
 
@@ -92,102 +116,114 @@ namespace OpenGLWinControl.OpenGL
 
         #region Functions with array pointer parameter wrappers
 
-        public static void RasterPos2dv(double[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos2dv(ptr);
-                });
+        public void RasterPos2dv(double[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos2dvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos2dv, v.Length);
+            RasterPos2dv(HeapData.ptrRasterPos2dv);
+        }
 
 
-        public static void RasterPos2fv(float[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos2fv(ptr);
-                });
+        public void RasterPos2fv(float[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos2fvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos2fv, v.Length);
+            RasterPos2fv(HeapData.ptrRasterPos2fv);
+        }
 
 
-        public static void RasterPos2iv(int[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos2iv(ptr);
-                });
+        public void RasterPos2iv(int[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos2ivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos2iv, v.Length);
+            RasterPos2iv(HeapData.ptrRasterPos2iv);
+        }
 
 
-        public static void RasterPos2sv(short[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos2sv(ptr);
-                });
+        public void RasterPos2sv(short[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos2svMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos2sv, v.Length);
+            RasterPos2sv(HeapData.ptrRasterPos2sv);
+        }
 
 
-        public static void RasterPos3dv(double[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos3dv(ptr);
-                });
+        public void RasterPos3dv(double[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos3dvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos3dv, v.Length);
+            RasterPos3dv(HeapData.ptrRasterPos3dv);
+        }
 
 
-        public static void RasterPos3fv(float[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos3fv(ptr);
-                });
+        public void RasterPos3fv(float[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos3fvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos3fv, v.Length);
+            RasterPos3fv(HeapData.ptrRasterPos3fv);
+        }
 
 
-        public static void RasterPos3iv(int[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos3iv(ptr);
-                });
+        public void RasterPos3iv(int[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos3ivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos3iv, v.Length);
+            RasterPos3iv(HeapData.ptrRasterPos3iv);
+        }
 
 
-        public static void RasterPos3sv(short[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos3sv(ptr);
-                });
-
-        
-        public static void RasterPos4dv(double[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos4dv(ptr);
-                });
+        public void RasterPos3sv(short[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos3svMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos3sv, v.Length);
+            RasterPos3sv(HeapData.ptrRasterPos3sv);
+        }
 
 
-        public static void RasterPos4fv(float[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos4fv(ptr);
-                });
+        public void RasterPos4dv(double[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos4dvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos4dv, v.Length);
+            RasterPos4dv(HeapData.ptrRasterPos4dv);
+        }
 
 
-        public static void RasterPos4iv(int[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos4iv(ptr);
-                });
+        public void RasterPos4fv(float[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos4fvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos4fv, v.Length);
+            RasterPos4fv(HeapData.ptrRasterPos4fv);
+        }
 
 
-        public static void RasterPos4sv(short[] v) =>
-            InvokeWithArrayPointer(ref v,
-                (ptr) => {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    RasterPos4sv(ptr);
-                });
+        public void RasterPos4iv(int[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos4ivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos4iv, v.Length);
+            RasterPos4iv(HeapData.ptrRasterPos4iv);
+        }
 
-        
+
+        public void RasterPos4sv(short[] v)
+        {
+            if (v == null || v.Length > HeapData.RasterPos4svMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(v, 0, HeapData.ptrRasterPos4sv, v.Length);
+            RasterPos4sv(HeapData.ptrRasterPos4sv);
+        }
+
+
         #endregion
     }
 }

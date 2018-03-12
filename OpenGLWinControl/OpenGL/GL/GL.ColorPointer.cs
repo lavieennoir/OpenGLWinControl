@@ -8,152 +8,58 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glColorPointer")]
-        private static extern void colorPointer(int size, PointerDataType type, int stride, IntPtr array);
+        static extern void colorPointer(int size, PointerDataType type, int stride, IntPtr array);
 
-        public static void ColorPointer(int size, int stride, byte[] array)
+        public void ColorPointer(int size, int stride, byte[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    colorPointer(size, PointerDataType.BYTE, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.ColorPointerbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(array, 0, HeapData.ptrColorPointerbv, array.Length);
+            colorPointer(size, PointerDataType.BYTE, stride, HeapData.ptrColorPointerbv);
         }
 
-        public static void ColorPointer(int size, int stride, int[] array)
+        public void ColorPointer(int size, int stride, int[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    colorPointer(size, PointerDataType.INT, stride, ptr);
-                });
-        }
+            if (array == null || array.Length > HeapData.ColorPointerivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
 
-
-        public static void ColorPointer(int size, int stride, short[] array)
-        {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    colorPointer(size, PointerDataType.SHORT, stride, ptr);
-                });
+            Marshal.Copy(array, 0, HeapData.ptrColorPointeriv, array.Length);
+            colorPointer(size, PointerDataType.INT, stride, HeapData.ptrColorPointeriv);
         }
 
 
-        public static void ColorPointer(int size, int stride, float[] array)
+        public void ColorPointer(int size, int stride, short[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    colorPointer(size, PointerDataType.FLOAT, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.ColorPointersvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(array, 0, HeapData.ptrColorPointersv, array.Length);
+            colorPointer(size, PointerDataType.SHORT, stride, HeapData.ptrColorPointersv);
         }
 
 
-        public static void ColorPointer(int size, int stride, double[] array)
+        public void ColorPointer(int size, int stride, float[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    colorPointer(size, PointerDataType.DOUBLE, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.ColorPointerfvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(array, 0, HeapData.ptrColorPointerfv, array.Length);
+            colorPointer(size, PointerDataType.FLOAT, stride, HeapData.ptrColorPointerfv);
         }
 
 
-        public static void ColorPointer(int size, int stride, byte[,] array)
+        public void ColorPointer(int size, int stride, double[] array)
         {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
+            if (array == null || array.Length > HeapData.ColorPointerdvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
 
-            byte[] linearArr = new byte[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    colorPointer(size, PointerDataType.BYTE, stride, ptr);
-                });
+            Marshal.Copy(array, 0, HeapData.ptrColorPointerdv, array.Length);
+            colorPointer(size, PointerDataType.DOUBLE, stride, HeapData.ptrColorPointerdv);
         }
 
-
-        public static void ColorPointer(int size, int stride, short[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            short[] linearArr = new short[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    colorPointer(size, PointerDataType.SHORT, stride, ptr);
-                });
-        }
-
-
-        public static void ColorPointer(int size, int stride, int[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            int[] linearArr = new int[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    colorPointer(size, PointerDataType.INT, stride, ptr);
-                });
-        }
-
-
-        public static void ColorPointer(int size, int stride, float[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            float[] linearArr = new float[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    colorPointer(size, PointerDataType.FLOAT, stride, ptr);
-                });
-        }
-
-
-        public static void ColorPointer(int size, int stride, double[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            double[] linearArr = new double[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    colorPointer(size, PointerDataType.DOUBLE, stride, ptr);
-                });
-        }
     }
 }

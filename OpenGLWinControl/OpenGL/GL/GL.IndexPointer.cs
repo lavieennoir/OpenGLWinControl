@@ -8,62 +8,68 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glIndexPointer")]
         private static extern void indexPointer(PointerDataType type, int stride, IntPtr array);
 
-        public static void IndexPointer(int stride, byte[] array)
+        public void IndexPointer(int stride, byte[] array)
+        {
+            if (array == null || array.Length > HeapData.IndexPointerbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(array, 0, HeapData.ptrIndexPointerbv, array.Length);
+            indexPointer(PointerDataType.BYTE, stride, HeapData.ptrIndexPointerbv);
+        }
+
+
+        public void IndexPointer(int stride, short[] array)
         {
             InvokeWithArrayPointer(ref array,
                 (ptr) =>
                 {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    indexPointer(PointerDataType.BYTE, stride, ptr);
+                    if (array == null || array.Length > HeapData.IndexPointersvMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(array, 0, HeapData.ptrIndexPointersv, array.Length);
+                    indexPointer(PointerDataType.SHORT, stride, HeapData.ptrIndexPointersv);
                 });
         }
 
 
-        public static void IndexPointer(int stride, short[] array)
+        public void IndexPointer(int stride, int[] array)
         {
             InvokeWithArrayPointer(ref array,
                 (ptr) =>
                 {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    indexPointer(PointerDataType.SHORT, stride, ptr);
+                    if (array == null || array.Length > HeapData.IndexPointerivMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(array, 0, HeapData.ptrIndexPointeriv, array.Length);
+                    indexPointer(PointerDataType.INT, stride, HeapData.ptrIndexPointeriv);
                 });
         }
 
 
-        public static void IndexPointer(int stride, int[] array)
+        public void IndexPointer(int stride, float[] array)
         {
             InvokeWithArrayPointer(ref array,
                 (ptr) =>
                 {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    indexPointer(PointerDataType.INT, stride, ptr);
+                    if (array == null || array.Length > HeapData.IndexPointerfvMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(array, 0, HeapData.ptrIndexPointerfv, array.Length);
+                    indexPointer(PointerDataType.FLOAT, stride, HeapData.ptrIndexPointerfv);
                 });
         }
 
 
-        public static void IndexPointer(int stride, float[] array)
+        public void IndexPointer(int stride, double[] array)
         {
             InvokeWithArrayPointer(ref array,
                 (ptr) =>
                 {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    indexPointer(PointerDataType.FLOAT, stride, ptr);
-                });
-        }
-
-
-        public static void IndexPointer(int stride, double[] array)
-        {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    indexPointer(PointerDataType.DOUBLE, stride, ptr);
+                    if (array == null || array.Length > HeapData.IndexPointerdvMaxSize)
+                        throw new ArgumentException("Array has to many elements.");
+                    Marshal.Copy(array, 0, HeapData.ptrIndexPointerdv, array.Length);
+                    indexPointer(PointerDataType.DOUBLE, stride, HeapData.ptrIndexPointerdv);
                 });
         }
     }

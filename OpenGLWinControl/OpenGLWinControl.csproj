@@ -71,6 +71,8 @@
     <Compile Include="OpenGL\Enumerations\GL\PolygonMode.cs" />
     <Compile Include="OpenGL\Enumerations\GL\ShadingModel.cs" />
     <Compile Include="OpenGL\Exceptions\OpenGLInitException.cs" />
+    <Compile Include="OpenGL\HeapData\GLUTHeapData.cs" />
+    <Compile Include="OpenGL\HeapData\GLUHeapData.cs" />
     <Compile Include="OpenGL\GL\GL.VertexPointer.cs" />
     <Compile Include="OpenGL\GL\GL.Indexes.cs" />
     <Compile Include="OpenGL\GL\GL.GetString.cs" />
@@ -95,6 +97,8 @@
     <Compile Include="OpenGLControl.Designer.cs">
       <DependentUpon>OpenGLControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenGL\HeapData\GLHeapData.cs" />
+    <Compile Include="OpenGL\HeapData\HeapData.cs" />
     <Compile Include="OpenGL\IRenderingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

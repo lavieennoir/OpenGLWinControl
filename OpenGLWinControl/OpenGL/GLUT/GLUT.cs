@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using OpenGLWinControl.OpenGL.Enumerations.GLUT;
+using OpenGLWinControl.OpenGL.HeapData;
 
 namespace OpenGLWinControl.OpenGL
 {
@@ -12,13 +13,32 @@ namespace OpenGLWinControl.OpenGL
     /// Containts static methods imported from GLUT library.
     /// (Here you can find methods wich have prefix glut in source library)
     /// </summary>
-    public static class GLUT
+    public class GLUT
     {
+        public GLUTHeapData HeapData;
+        
+
+        internal GLUT()
+        {
+            HeapData = new GLUTHeapData();
+        }
+
+        public void ReallocHeapData(GLUTHeapData newData)
+        {
+            HeapData = newData;
+        }
+
+        public void BitmapCharacter(BitmapFont font, char character) =>
+            bitmapCharacter(font, character);
+
+        public void StrokeCharacter(StrokeFont font, char character) =>
+            strokeCharacter(font, character);
+
         [DllImport("glut32.dll", EntryPoint = "glutBitmapCharacter")]
-        public static extern void BitmapCharacter(BitmapFont font, char character);
+        static extern void bitmapCharacter(BitmapFont font, char character);
 
 
         [DllImport("glut32.dll", EntryPoint = "glutStrokeCharacter")]
-        public static extern void StrokeCharacter(StrokeFont font, char character);
+        static extern void strokeCharacter(StrokeFont font, char character);
     }
 }

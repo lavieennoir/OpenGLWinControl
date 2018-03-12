@@ -1,159 +1,56 @@
 ﻿using OpenGLWinControl.OpenGL.Enumerations.GL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glVertexPointer")]
         private static extern void vertexPointer(int size, PointerDataType type, int stride, IntPtr array);
 
-        public static void VertexPointer(int size, int stride, byte[] array)
+        public void VertexPointer(int size, int stride, byte[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    vertexPointer(size, PointerDataType.BYTE, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.VertexPointerbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(array, 0, HeapData.ptrVertexPointerbv, array.Length);
+            vertexPointer(size, PointerDataType.BYTE, stride, HeapData.ptrVertexPointerbv);
         }
 
-        public static void VertexPointer(int size, int stride, int[] array)
+        public void VertexPointer(int size, int stride, int[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    vertexPointer(size, PointerDataType.INT, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.VertexPointerivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(array, 0, HeapData.ptrVertexPointeriv, array.Length);
+            vertexPointer(size, PointerDataType.INT, stride, HeapData.ptrVertexPointeriv);
         }
 
 
-        public static void VertexPointer(int size, int stride, short[] array)
+        public void VertexPointer(int size, int stride, short[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    vertexPointer(size, PointerDataType.SHORT, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.VertexPointersvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(array, 0, HeapData.ptrVertexPointersv, array.Length);
+            vertexPointer(size, PointerDataType.SHORT, stride, HeapData.ptrVertexPointersv);
         }
 
 
-        public static void VertexPointer(int size, int stride, float[] array)
+        public void VertexPointer(int size, int stride, float[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    vertexPointer(size, PointerDataType.FLOAT, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.VertexPointerfvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(array, 0, HeapData.ptrVertexPointerfv, array.Length);
+            vertexPointer(size, PointerDataType.FLOAT, stride, HeapData.ptrVertexPointerfv);
         }
 
 
-        public static void VertexPointer(int size, int stride, double[] array)
+        public void VertexPointer(int size, int stride, double[] array)
         {
-            InvokeWithArrayPointer(ref array,
-                (ptr) =>
-                {
-                    Marshal.Copy(array, 0, ptr, array.Length);
-                    vertexPointer(size, PointerDataType.DOUBLE, stride, ptr);
-                });
+            if (array == null || array.Length > HeapData.VertexPointerdvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            Marshal.Copy(array, 0, HeapData.ptrVertexPointerdv, array.Length);
+            vertexPointer(size, PointerDataType.DOUBLE, stride, HeapData.ptrVertexPointerdv);
         }
-
-
-        public static void VertexPointer(int size, int stride, byte[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            byte[] linearArr = new byte[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    vertexPointer(size, PointerDataType.BYTE, stride, ptr);
-                });
-        }
-
-
-        public static void VertexPointer(int size, int stride, short[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            short[] linearArr = new short[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    vertexPointer(size, PointerDataType.SHORT, stride, ptr);
-                });
-        }
-
-
-        public static void VertexPointer(int size, int stride, int[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            int[] linearArr = new int[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    vertexPointer(size, PointerDataType.INT, stride, ptr);
-                });
-        }
-
-
-        public static void VertexPointer(int size, int stride, float[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            float[] linearArr = new float[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    vertexPointer(size, PointerDataType.FLOAT, stride, ptr);
-                });
-        }
-
-
-        public static void VertexPointer(int size, int stride, double[,] array)
-        {
-            int height = array.GetLength(0);
-            int width = array.GetLength(1);
-
-            double[] linearArr = new double[array.Length];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    linearArr[i * width + j] = array[i, j];
-            InvokeWithArrayPointer(ref linearArr,
-                (ptr) =>
-                {
-                    Marshal.Copy(linearArr, 0, ptr, linearArr.Length);
-                    vertexPointer(size, PointerDataType.DOUBLE, stride, ptr);
-                });
-        }
+        
     }
 }

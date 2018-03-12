@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenGLWinControl.OpenGL;
 using OpenGLWinControl.OpenGL.Enumerations;
 using OpenGLWinControl.OpenGL.Exceptions;
+using OpenGLWinControl.OpenGL.HeapData;
 
 namespace OpenGLWinControl
 {
@@ -124,20 +125,40 @@ namespace OpenGLWinControl
             set
             {
                 if(renderingContext != null)
-                    Layout -= (obj, e) => renderingContext.Resize(this.Width, this.Height);
+                    Layout -= (obj, e) => renderingContext.Resize(this.GLMethod, this.GLUMethod, this.GLUTMethod, this.Width, this.Height);
 
                 renderingContext = value;
 
                 if (renderingContext != null)
                 {
-                    Layout += (obj, e) => renderingContext.Resize(this.Width, this.Height);
+                    Layout += (obj, e) => renderingContext.Resize(this.GLMethod, this.GLUMethod, this.GLUTMethod, this.Width, this.Height);
 
-                    renderingContext.Init(this.Width, this.Height);
+                    //update heap pointers
+                    GLMethod.ReallocHeapData(renderingContext.SetupGLDataLimits() ?? new GLHeapData());
+                    GLUMethod.ReallocHeapData(renderingContext.SetupGLUDataLimits() ?? new GLUHeapData());
+                    GLUTMethod.ReallocHeapData(renderingContext.SetupGLUTDataLimits() ?? new GLUTHeapData());
+
+                    renderingContext.Init(this.GLMethod, this.GLUMethod, this.GLUTMethod, this.Width, this.Height);
                 }
             }
         }
 
-        
+        /// <summary>
+        ///     GL functions for this control
+        /// </summary>
+        [Browsable(false)]
+        protected GL GLMethod { get; set; } = new GL();
+        /// <summary>
+        ///     GLU functions for this control
+        /// </summary>
+        [Browsable(false)]
+        protected GLU GLUMethod { get; set; } = new GLU();
+        /// <summary>
+        ///     GLUT functions for this control
+        /// </summary>
+        [Browsable(false)]
+        protected GLUT GLUTMethod { get; set; } = new GLUT();
+
         /// <summary>
         ///     Initialize OpenGl Control without callbacks 
         ///     for inintialization and rendering.
@@ -235,10 +256,18 @@ namespace OpenGLWinControl
             if (RenderingContext == null)
                 throw new OpenGLInitException("RenderingContext is null.");
             else
-                RenderingContext.Init(this.Width, this.Height);
+            {
+                //update heap pointers
+                GLMethod.ReallocHeapData(renderingContext.SetupGLDataLimits() ?? new GLHeapData());
+                GLUMethod.ReallocHeapData(renderingContext.SetupGLUDataLimits() ?? new GLUHeapData());
+                GLUTMethod.ReallocHeapData(renderingContext.SetupGLUTDataLimits() ?? new GLUTHeapData());
+
+                RenderingContext.Init(this.GLMethod, this.GLUMethod, this.GLUTMethod, this.Width, this.Height);
+            }
         }
 
         #endregion
+        
 
         /// <summary>
         ///     Raises Control.Paint event.
@@ -273,7 +302,7 @@ namespace OpenGLWinControl
         {
             if (RenderingContext != null)
             {
-                RenderingContext.Render(this.Width, this.Height);
+                RenderingContext.Render(this.GLMethod, this.GLUMethod, this.GLUTMethod, this.Width, this.Height);
                 SwapBuffers();
             }
         }
@@ -293,6 +322,10 @@ namespace OpenGLWinControl
         /// </summary>
         ~OpenGLControl()
         {
+            GLMethod.HeapData.Dispose();
+            GLUMethod.HeapData.Dispose();
+            GLUTMethod.HeapData.Dispose();
+
             this.DestroyHandle();
         }
     }

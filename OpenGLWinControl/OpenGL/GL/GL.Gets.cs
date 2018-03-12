@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glGetBooleanv")]
         private static extern void GetBooleanv(GetTarget pname, IntPtr param);
@@ -23,48 +23,52 @@ namespace OpenGLWinControl.OpenGL
         private static extern void GetIntegerv(GetTarget pname, IntPtr param);
 
 
-        public static void GetBooleanv(GetTarget pname, bool[] param)
+        public void GetBoolean(GetTarget pname, bool[] param)
         {
             byte[] v = param.Select(x => x ? (byte)1 : (byte)0).ToArray();
-            InvokeWithArrayPointer(ref v,
-                (ptr) =>
-                {
-                    Marshal.Copy(v, 0, ptr, v.Length);
-                    GetBooleanv(pname, ptr);
-                    Marshal.Copy(ptr, v, 0, v.Length);
-                });
+
+            if (param == null || param.Length > HeapData.GetBooleanMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(v, 0, HeapData.ptrGetBoolean, v.Length);
+            GetBooleanv(pname, HeapData.ptrGetBoolean);
+            Marshal.Copy(HeapData.ptrGetBoolean, v, 0, v.Length);
+
             for (int i = 0; i < param.Length; i++)
                 param[i] = v[i] != 0;
         }
 
 
-        public static void GetFloatv(GetTarget pname, float[] param) =>
-            InvokeWithArrayPointer(ref param,
-                (ptr) =>
-                {
-                    Marshal.Copy(param, 0, ptr, param.Length);
-                    GetFloatv(pname, ptr);
-                    Marshal.Copy(ptr, param, 0, param.Length);
-                });
+        public void GetFloat(GetTarget pname, float[] param)
+        {
+            if (param == null || param.Length > HeapData.GetFloatMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(param, 0, HeapData.ptrGetFloat, param.Length);
+            GetFloatv(pname, HeapData.ptrGetFloat);
+            Marshal.Copy(HeapData.ptrGetFloat, param, 0, param.Length);
+        }
 
 
-        public static void GetDoublev(GetTarget pname, double[] param) =>
-            InvokeWithArrayPointer(ref param,
-                (ptr) =>
-                {
-                    Marshal.Copy(param, 0, ptr, param.Length);
-                    GetDoublev(pname, ptr);
-                    Marshal.Copy(ptr, param, 0, param.Length);
-                });
+        public void GetDouble(GetTarget pname, double[] param)
+        {
+            if (param == null || param.Length > HeapData.GetDoubleMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(param, 0, HeapData.ptrGetDouble, param.Length);
+            GetDoublev(pname, HeapData.ptrGetDouble);
+            Marshal.Copy(HeapData.ptrGetDouble, param, 0, param.Length);
+        }
 
 
-        public static void GetIntegerv(GetTarget pname, int[] param) =>
-            InvokeWithArrayPointer(ref param,
-                (ptr) =>
-                {
-                    Marshal.Copy(param, 0, ptr, param.Length);
-                    GetIntegerv(pname, ptr);
-                    Marshal.Copy(ptr, param, 0, param.Length);
-                });
+        public void GetInteger(GetTarget pname, int[] param)
+        {
+            if (param == null || param.Length > HeapData.GetIntegerMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(param, 0, HeapData.ptrGetInteger, param.Length);
+            GetIntegerv(pname, HeapData.ptrGetInteger);
+            Marshal.Copy(HeapData.ptrGetInteger, param, 0, param.Length);
+        }
     }
 }

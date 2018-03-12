@@ -8,73 +8,88 @@ using System.Threading.Tasks;
 
 namespace OpenGLWinControl.OpenGL
 {
-    public static partial class GL
+    public partial class GL
     {
         [DllImport("opengl32.dll", EntryPoint = "glDrawPixels")]
         private static extern void DrawPixels(
             int width, int height, PixelDataFormat format, PixelDataType type, IntPtr pixels);
 
                 
-        public static void DrawPixels(
-            int width, int height, PixelDataFormat format, byte[] pixels) =>
-            InvokeWithArrayPointer(ref pixels,
-                (ptr) => {
-                    Marshal.Copy(pixels, 0, ptr, pixels.Length);
-                    DrawPixels(width, height, format, PixelDataType.BYTE, ptr);
-                });
+        public void DrawPixels(
+            int width, int height, PixelDataFormat format, byte[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.DrawPixelsbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(pixels, 0, HeapData.ptrDrawPixelsbv, pixels.Length);
+            DrawPixels(width, height, format, PixelDataType.BYTE, HeapData.ptrDrawPixelsbv);
+        }
 
 
-        public static void DrawPixels(
-            int width, int height, PixelDataFormat format, sbyte[] pixels) =>
-            InvokeWithArrayPointer(ref pixels,
-                (ptr) => {
-                    Marshal.Copy(pixels.Select(x => (byte)x).ToArray(), 0, ptr, pixels.Length);
-                    DrawPixels(width, height, format, PixelDataType.SIGNED_BYTE, ptr);
-                });
+        public void DrawPixels(
+            int width, int height, PixelDataFormat format, sbyte[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.DrawPixelssbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(pixels.Select(x => (byte)x).ToArray(), 0, HeapData.ptrDrawPixelssbv, pixels.Length);
+            DrawPixels(width, height, format, PixelDataType.SIGNED_BYTE, HeapData.ptrDrawPixelssbv);
+        }
 
 
-        public static void DrawPixels(
-            int width, int height, PixelDataFormat format, short[] pixels) =>
-            InvokeWithArrayPointer(ref pixels,
-                (ptr) => {
-                    Marshal.Copy(pixels, 0, ptr, pixels.Length);
-                    DrawPixels(width, height, format, PixelDataType.SHORT, ptr);
-                });
+        public void DrawPixels(
+            int width, int height, PixelDataFormat format, short[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.DrawPixelssvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(pixels, 0, HeapData.ptrDrawPixelssv, pixels.Length);
+            DrawPixels(width, height, format, PixelDataType.SHORT, HeapData.ptrDrawPixelssv);
+        }
 
 
-        public static void DrawPixels(
-            int width, int height, PixelDataFormat format, ushort[] pixels) =>
-            InvokeWithArrayPointer(ref pixels,
-                (ptr) => {
-                    Marshal.Copy(pixels.Select(x => (short)x).ToArray(), 0, ptr, pixels.Length);
-                    DrawPixels(width, height, format, PixelDataType.UNSIGNED_SHORT, ptr);
-                });
+        public void DrawPixels(
+
+            int width, int height, PixelDataFormat format, ushort[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.DrawPixelsusvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(pixels.Select(x => (short)x).ToArray(), 0, HeapData.ptrDrawPixelsusv, pixels.Length);
+            DrawPixels(width, height, format, PixelDataType.UNSIGNED_SHORT, HeapData.ptrDrawPixelsusv);
+        }
 
 
-        public static void DrawPixels(
-            int width, int height, PixelDataFormat format, int[] pixels) =>
-            InvokeWithArrayPointer(ref pixels,
-                (ptr) => {
-                    Marshal.Copy(pixels, 0, ptr, pixels.Length);
-                    DrawPixels(width, height, format, PixelDataType.INT, ptr);
-                });
+        public void DrawPixels(
+            int width, int height, PixelDataFormat format, int[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.DrawPixelsivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(pixels, 0, HeapData.ptrDrawPixelsiv, pixels.Length);
+            DrawPixels(width, height, format, PixelDataType.INT, HeapData.ptrDrawPixelsiv);
+        }
 
 
-        public static void DrawPixels(
-            int width, int height, PixelDataFormat format, uint[] pixels) =>
-            InvokeWithArrayPointer(ref pixels,
-                (ptr) => {
-                    Marshal.Copy(pixels.Select(x => (int)x).ToArray(), 0, ptr, pixels.Length);
-                    DrawPixels(width, height, format, PixelDataType.UNSIGNED_INT, ptr);
-                });
+        public void DrawPixels(
+            int width, int height, PixelDataFormat format, uint[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.DrawPixelsuivMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(pixels.Select(x => (int)x).ToArray(), 0, HeapData.ptrDrawPixelsuiv, pixels.Length);
+            DrawPixels(width, height, format, PixelDataType.UNSIGNED_INT, HeapData.ptrDrawPixelsuiv);
+        }
 
 
-        public static void DrawPixels(
-           int width, int height, PixelDataFormat format, float[] pixels) =>
-           InvokeWithArrayPointer(ref pixels,
-               (ptr) => {
-                   Marshal.Copy(pixels, 0, ptr, pixels.Length);
-                   DrawPixels(width, height, format, PixelDataType.FLOAT, ptr);
-               });
+        public void DrawPixels(
+           int width, int height, PixelDataFormat format, float[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.DrawPixelsfvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(pixels, 0, HeapData.ptrDrawPixelsfv, pixels.Length);
+            DrawPixels(width, height, format, PixelDataType.FLOAT, HeapData.ptrDrawPixelsfv);
+        }
     }
 }
