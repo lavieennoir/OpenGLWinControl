@@ -13,6 +13,12 @@ namespace OpenGLWinControl.OpenGL.HeapData
     /// </summary>
     public class GLHeapData : HeapData
     {
+        public int TexImage2DbvMaxSize { get; set; } = 66560;
+        internal IntPtr ptrTexImage2Dbv = IntPtr.Zero;
+
+        public int MaterialfvMaxSize { get; set; } = 4;
+        internal IntPtr ptrMaterialfv = IntPtr.Zero;
+
         public int VertexPointerbvMaxSize { get; set; } = 1;
         internal IntPtr ptrVertexPointerbv = IntPtr.Zero;
 
@@ -356,10 +362,19 @@ namespace OpenGLWinControl.OpenGL.HeapData
         internal int Color4usvMaxSize { get; set; } = 4;
         internal IntPtr ptrColor4usv = IntPtr.Zero;
 
+        internal int LightfvMaxSize { get; set; } = 4;
+        internal IntPtr ptrLightfv = IntPtr.Zero;
 
+        internal int LightModelfvMaxSize { get; set; } = 4;
+        internal IntPtr ptrLightModelfv = IntPtr.Zero;
 
         internal override void AllocHeapPointers()
         {
+            ptrTexImage2Dbv = Marshal.AllocHGlobal(sizeof(byte) * TexImage2DbvMaxSize);
+            ptrMaterialfv = Marshal.AllocHGlobal(sizeof(float) * MaterialfvMaxSize);
+            ptrLightfv = Marshal.AllocHGlobal(sizeof(float) * LightfvMaxSize);
+
+            ptrLightModelfv = Marshal.AllocHGlobal(sizeof(float) * LightModelfvMaxSize);
             ptrVertexPointerbv = Marshal.AllocHGlobal(sizeof(byte) * VertexPointerbvMaxSize);
             ptrVertexPointersv = Marshal.AllocHGlobal(sizeof(short) * VertexPointersvMaxSize);
             ptrVertexPointeriv = Marshal.AllocHGlobal(sizeof(int) * VertexPointerivMaxSize);
@@ -497,6 +512,10 @@ namespace OpenGLWinControl.OpenGL.HeapData
             // Check to see if FreeHeapPointers has already been called.
             if (!this.memoryAllocated)
             {
+                Marshal.FreeHGlobal(ptrTexImage2Dbv);
+                Marshal.FreeHGlobal(ptrMaterialfv);
+                Marshal.FreeHGlobal(ptrLightModelfv);
+                Marshal.FreeHGlobal(ptrLightfv);
                 Marshal.FreeHGlobal(ptrVertexPointerbv);
                 Marshal.FreeHGlobal(ptrVertexPointersv);
                 Marshal.FreeHGlobal(ptrVertexPointeriv);

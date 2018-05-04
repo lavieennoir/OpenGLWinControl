@@ -20,7 +20,7 @@ namespace OpenGLWinControl.OpenGL
         ///     function parameters passed by pointer.
         /// </summary>
         internal GLHeapData HeapData;
-        
+
 
         /// <summary>
         ///     Interanl contructor for instantiating in control class.
@@ -42,7 +42,7 @@ namespace OpenGLWinControl.OpenGL
             HeapData = newData;
             HeapData.AllocHeapPointers();
         }
-        
+
 
         /// <summary>
         ///     Allocates empty area of memory with size of input array 
@@ -106,6 +106,13 @@ namespace OpenGLWinControl.OpenGL
         }
 
 
+        [DllImport("opengl32.dll", EntryPoint = "glBindTexture")]
+        static extern void bindTexture(GetTarget target, int textureId);
+
+        public void BindTexture(GetTarget target, int textureId) =>
+            bindTexture(target, textureId);
+
+
         [DllImport("opengl32.dll", EntryPoint = "glBegin")]
         static extern void begin(BeginMode mode);
 
@@ -115,7 +122,7 @@ namespace OpenGLWinControl.OpenGL
 
         [DllImport("opengl32.dll", EntryPoint = "glBlendFunc")]
         static extern void blendFunc(BlendingFactor sfactor, BlendingFactor dfactor);
-        
+
         public void BlendFunc(BlendingFactor sfactor, BlendingFactor dfactor) =>
             blendFunc(sfactor, dfactor);
 
@@ -154,7 +161,7 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glClearDepth")]
         static extern void clearDepth(double depth);
 
-        public void ClearDepth(double depth)=>
+        public void ClearDepth(double depth) =>
             clearDepth(depth);
 
 
@@ -168,24 +175,24 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glClearStencil")]
         static extern void clearStencil(int s);
 
-        public void ClearStencil(int s)=>
+        public void ClearStencil(int s) =>
             clearStencil(s);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glCopyPixels")]
         static extern void copyPixels(int x, int y, int width, int height, PixelCopyType type);
 
-        public void CopyPixels(int x, int y, int width, int height, PixelCopyType type)=>
+        public void CopyPixels(int x, int y, int width, int height, PixelCopyType type) =>
             copyPixels(x, y, width, height, type);
 
 
         //D
 
 
-        [DllImport("opengl32.dll", EntryPoint = "glDeleteLists")]
+        [DllImport("opengl32dll", EntryPoint = "glDeleteLists")]
         static extern void deleteLists(uint list, int range);
 
-        public void DeleteLists(uint list, int range)=>
+        public void DeleteLists(uint list, int range) =>
              deleteLists(list, range);
 
 
@@ -199,28 +206,28 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glDepthMask")]
         static extern void depthMask(bool flag);
 
-        public void DepthMask(bool flag)=>
+        public void DepthMask(bool flag) =>
              depthMask(flag);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glDepthRange")]
         static extern void depthRange(double zNear, double zFar);
 
-        public void DepthRange(double zNear, double zFar)=>
+        public void DepthRange(double zNear, double zFar) =>
             depthRange(zNear, zFar);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glDisable")]
         static extern void disable(Capability cap);
 
-        public void Disable(Capability cap)=>
+        public void Disable(Capability cap) =>
              disable(cap);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glDisableClientState")]
         static extern void disableClientState(ClientSideCapability cap);
 
-        public void DisableClientState(ClientSideCapability cap)=>
+        public void DisableClientState(ClientSideCapability cap) =>
              disableClientState(cap);
 
 
@@ -233,7 +240,7 @@ namespace OpenGLWinControl.OpenGL
 
         public void EdgeFlag(bool flag) =>
             edgeFlag(flag ? (byte)1 : (byte)0);
-        
+
 
         [DllImport("opengl32.dll", EntryPoint = "glEdgeFlag")]
         static extern void edgeFlag(IntPtr flag);
@@ -252,14 +259,14 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glEnable")]
         static extern void enable(Capability cap);
 
-        public void Enable(Capability cap)=>
+        public void Enable(Capability cap) =>
             enable(cap);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glEnableClientState")]
         static extern void enableClientState(ClientSideCapability cap);
 
-        public void EnableClientState(ClientSideCapability cap)=>
+        public void EnableClientState(ClientSideCapability cap) =>
             enableClientState(cap);
 
 
@@ -273,20 +280,20 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glEndList")]
         static extern void endList();
 
-        public void EndList()=>
+        public void EndList() =>
             endList();
 
 
         [DllImport("opengl32.dll", EntryPoint = "glEvalPoint1")]
         static extern void evalPoint1(int i);
 
-        public void EvalPoint1(int i)=>
+        public void EvalPoint1(int i) =>
             evalPoint1(i);
 
         [DllImport("opengl32.dll", EntryPoint = "glEvalPoint2")]
         static extern void evalPoint2(int i, int j);
 
-        public void EvalPoint2(int i, int j)=>
+        public void EvalPoint2(int i, int j) =>
             evalPoint2(i, j);
 
 
@@ -296,39 +303,44 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glFinish")]
         static extern void finish();
 
-        public void Finish()=>
+        public void Finish() =>
             finish();
 
 
         [DllImport("opengl32.dll", EntryPoint = "glFlush")]
         static extern void flush();
 
-        public void Flush()=>
+        public void Flush() =>
              flush();
 
 
         [DllImport("opengl32.dll", EntryPoint = "glFrustum")]
         static extern void frustum(double left, double right, double bottom, double top, double zNear, double zFar);
 
-        public void Frustum(double left, double right, double bottom, double top, double zNear, double zFar)=>
+        public void Frustum(double left, double right, double bottom, double top, double zNear, double zFar) =>
             frustum(left, right, bottom, top, zNear, zFar);
 
 
 
         //G
 
+        [DllImport("opengl32.dll", EntryPoint = "glGenTextures")]
+        static extern void genTextures(int n, ref int textureId);
+
+        public void GenTextures(int n, ref int textureId) =>
+            genTextures(n, ref textureId);
 
         [DllImport("opengl32.dll", EntryPoint = "glGenLists")]
         static extern uint genLists(int range);
 
-        public uint GenLists(int range)=>
+        public uint GenLists(int range) =>
             genLists(range);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glGetError")]
         static extern ErrorCode getError();
 
-        public ErrorCode GetError()=>
+        public ErrorCode GetError() =>
             getError();
 
 
@@ -338,7 +350,7 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glHint")]
         static extern void hint(HintTarget target, HintMode mode);
 
-        public void Hint(HintTarget target, HintMode mode)=>
+        public void Hint(HintTarget target, HintMode mode) =>
             hint(target, mode);
 
 
@@ -348,14 +360,14 @@ namespace OpenGLWinControl.OpenGL
         [DllImport("opengl32.dll", EntryPoint = "glIndexMask")]
         static extern void indexMask(uint mask);
 
-        public void IndexMask(uint mask)=>
+        public void IndexMask(uint mask) =>
             indexMask(mask);
 
 
         [DllImport("opengl32.dll", EntryPoint = "glInitNames")]
         static extern void initNames();
 
-        public void InitNames()=>
+        public void InitNames() =>
              initNames();
 
 
@@ -393,6 +405,43 @@ namespace OpenGLWinControl.OpenGL
 
 
         //L
+
+        [DllImport("opengl32.dll", EntryPoint = "glLightfv")]
+        static extern void lightfv(LightName light, LightParameter pname, IntPtr param);
+
+        public void Lightfv(LightName light, LightParameter pname, float[] param)
+        {
+            if (param == null || param.Length > HeapData.LightfvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(param, 0, HeapData.ptrLightfv, param.Length);
+            lightfv(light, pname, HeapData.ptrLightfv);
+        }
+
+        [DllImport("opengl32.dll", EntryPoint = "glLightf")]
+        static extern void lightf(LightName light, LightParameter pname, float param);
+
+        public void Lightf(LightName light, LightParameter pname, float param) =>
+            lightf(light, pname, param);
+
+        [DllImport("opengl32.dll", EntryPoint = "glLighti")]
+        static extern void lighti(LightName light, LightParameter pname, int param);
+
+        public void Lighti(LightName light, LightParameter pname, int param) =>
+            lighti(light, pname, param);
+        // WINGDIAPI void APIENTRY glLightiv(GLenum light, GLenum pname, const GLint*params);
+
+        [DllImport("opengl32.dll", EntryPoint = "glLightModelf")]
+        static extern void lightModelf(LightModelParams pname, IntPtr param);
+
+        public void LightModelf(LightModelParams pname, float[] param)
+        {
+            if (param == null || param.Length > HeapData.LightfvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(param, 0, HeapData.ptrLightfv, param.Length);
+            lightModelf(pname, HeapData.ptrLightfv);
+        }
 
 
         [DllImport("opengl32.dll", EntryPoint = "glLineStipple")]
@@ -485,6 +534,18 @@ namespace OpenGLWinControl.OpenGL
 
         public void MapGrid2(int un, float u1, float u2, int vn, float v1, float v2)=>
              mapGrid2(un, u1, u2, vn, v1, v2);
+
+        [DllImport("opengl32.dll", EntryPoint = "glMaterialfv")]
+        static extern void materialfv(FacingMode light, LightParameter pname, IntPtr param);
+
+        public void Materialfv(FacingMode light, LightParameter pname, float[] param)
+        {
+            if (param == null || param.Length > HeapData.MaterialfvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+
+            Marshal.Copy(param, 0, HeapData.ptrMaterialfv, param.Length);
+            materialfv(light, pname, HeapData.ptrMaterialfv);
+        }
 
 
         [DllImport("opengl32.dll", EntryPoint = "glMatrixMode")]
@@ -693,6 +754,31 @@ namespace OpenGLWinControl.OpenGL
 
 
         //T
+        [DllImport("opengl32.dll", EntryPoint = "glTexImage2D")]
+        static extern void texImage2D(
+            GetTarget target, int level, PixelDataFormat internalformat, 
+            int width, int height, int border, 
+            PixelDataFormat format, IndexesDataType type, IntPtr pixels);
+
+        public void TexImage2D(
+            GetTarget target, int level, PixelDataFormat internalformat,
+            int width, int height, int border,
+            PixelDataFormat format, byte[] pixels)
+        {
+            if (pixels == null || pixels.Length > HeapData.TexImage2DbvMaxSize)
+                throw new ArgumentException("Array has to many elements.");
+            //IntPtr ptr = Marshal.AllocHGlobal(sizeof(byte) * 2048);
+            Marshal.Copy(pixels, 0, HeapData.ptrTexImage2Dbv, pixels.Length);
+            texImage2D(target, level, internalformat, 
+                width, height, border, format, IndexesDataType.UNSIGNED_BYTE,
+                HeapData.ptrTexImage2Dbv);
+        }
+
+        [DllImport("opengl32.dll", EntryPoint = "glTexParameteri")]
+        static extern void texParameteri(GetTarget target, TextureParameterName pname, TextureMagFilter param);
+
+        public void TexParameteri(GetTarget target, TextureParameterName pname, TextureMagFilter param) =>
+            texParameteri(target, pname, param);
 
 
         //U

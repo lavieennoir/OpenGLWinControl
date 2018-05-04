@@ -43,8 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextProcessor.cs" />
-    <Compile Include="OpenGL\Enumerations\GLUT\StrokeFont.cs" />
     <Compile Include="OpenGL\Enumerations\GLUT\BitmapFont.cs" />
+    <Compile Include="OpenGL\Enumerations\GLUT\StrokeFont.cs" />
+    <Compile Include="OpenGL\Enumerations\GLUT\Button.cs" />
+    <Compile Include="OpenGL\Enumerations\GLU\QuadricDrawStyle.cs" />
+    <Compile Include="OpenGL\Enumerations\GL\TextureMagFilter.cs" />
+    <Compile Include="OpenGL\Enumerations\GL\TextureParameterName.cs" />
+    <Compile Include="OpenGL\Enumerations\GL\LightModelParams.cs" />
+    <Compile Include="OpenGL\Enumerations\GL\MaterialParameter.cs" />
+    <Compile Include="OpenGL\Enumerations\GL\LightParameter.cs" />
+    <Compile Include="OpenGL\Enumerations\GL\LightName.cs" />
     <Compile Include="OpenGL\Enumerations\GL\AttributeMask.cs" />
     <Compile Include="OpenGL\Enumerations\GL\ClearAttributeMask.cs" />
     <Compile Include="OpenGL\Enumerations\GL\BeginMode.cs" />
@@ -107,8 +115,6 @@
       <DependentUpon>OpenGLControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="OpenGL\Enumerations\GLU\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
